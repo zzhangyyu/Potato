@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author zhangyu
  */
-public class RvConsiliaByDateAdapter extends UltimateViewAdapter<RvConsiliaByDateAdapter.MyViewHolder> {
+public class RvConsiliaByDateAdapter extends UltimateViewAdapter<RvConsiliaByDateAdapter.ConsiliaViewHolder> {
     protected Context mContext;
     protected List<String> mDatas;
     private LayoutInflater mLayoutInflater;
@@ -29,25 +29,25 @@ public class RvConsiliaByDateAdapter extends UltimateViewAdapter<RvConsiliaByDat
     }
 
     @Override
-    public RvConsiliaByDateAdapter.MyViewHolder newFooterHolder(View view) {
-        return new MyViewHolder(view);
+    public ConsiliaViewHolder newFooterHolder(View view) {
+        return new ConsiliaViewHolder(view);
     }
 
     @Override
-    public RvConsiliaByDateAdapter.MyViewHolder newHeaderHolder(View view) {
-        return new MyViewHolder(view);
+    public ConsiliaViewHolder newHeaderHolder(View view) {
+        return new ConsiliaViewHolder(view);
     }
 
     @Override
-    public RvConsiliaByDateAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent) {
+    public ConsiliaViewHolder onCreateViewHolder(ViewGroup parent) {
         View v = mLayoutInflater.inflate(R.layout.item_rv_consilia_by_date, parent, false);
-        return new MyViewHolder(v);
+        return new ConsiliaViewHolder(v);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View v = mLayoutInflater.inflate(R.layout.header_rv_consilia_by_date, parent, false);
-        return new MyViewHolder(v);
+        return new ConsiliaViewHolder(v);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class RvConsiliaByDateAdapter extends UltimateViewAdapter<RvConsiliaByDat
     }
 
     @Override
-    public void onBindViewHolder(final RvConsiliaByDateAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final ConsiliaViewHolder holder, int position) {
         if (position < getItemCount() && (customHeaderView != null ? position <= mDatas.size() : position < mDatas.size()) && (customHeaderView != null ? position > 0 : true)) {
             position -= customHeaderView == null ? 0 : 1;
             holder.tv.setText(mDatas.get(position));
@@ -94,13 +94,13 @@ public class RvConsiliaByDateAdapter extends UltimateViewAdapter<RvConsiliaByDat
         if (customHeaderView != null) {
             position -= 1;
         }
-        ((MyViewHolder)holder).tv.setText("header  "+(position+"").charAt(0));
+        ((ConsiliaViewHolder)holder).tv.setText("header  "+(position+"").charAt(0));
     }
 
-    class MyViewHolder extends UltimateRecyclerviewViewHolder {
+    class ConsiliaViewHolder extends UltimateRecyclerviewViewHolder {
         public TextView tv;
 
-        public MyViewHolder(View itemView) {
+        public ConsiliaViewHolder(View itemView) {
             super(itemView);
             tv = (TextView) itemView.findViewById(R.id.item_rv_consilia_date);
         }
