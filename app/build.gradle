@@ -28,4 +28,5 @@ dependencies {
     compile 'com.marshalchen.ultimaterecyclerview:library:0.7.3'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.android.support:design:25.4.0'
+    compile 'com.google.code.gson:gson:2.8.1'
 }

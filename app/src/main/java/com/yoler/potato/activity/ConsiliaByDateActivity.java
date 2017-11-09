@@ -12,9 +12,19 @@ import android.view.View;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.yoler.potato.R;
 import com.yoler.potato.adapter.RvConsiliaByDateAdapter;
+import com.yoler.potato.request.PatientByDateReq;
+import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.GsonUtil;
+import com.yoler.potato.util.MyOkHttpUtil;
+import com.yoler.potato.util.ToastUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class ConsiliaByDateActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -32,7 +42,6 @@ public class ConsiliaByDateActivity extends BaseActivity implements BottomNaviga
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
         handler = new Handler();
         mView = (UltimateRecyclerView) findViewById(R.id.ultimate_recycler_view);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_view);
@@ -52,6 +61,31 @@ public class ConsiliaByDateActivity extends BaseActivity implements BottomNaviga
                         mView.setRefreshing(false);
                     }
                 }, 2000);
+            }
+        });
+        getPatientByDate();
+
+    }
+
+    private void getPatientByDate() {
+        PatientByDateReq patientByDateReq = new PatientByDateReq();
+        patientByDateReq.setPageIdx("1");
+        patientByDateReq.setRecordPerPage("20");
+        patientByDateReq.setQueryStartDate("2016-05-10");
+        patientByDateReq.setQueryEndDate("2017-11-08");
+        patientByDateReq.setOs("Android");
+        patientByDateReq.setPhone("15311496135");
+        patientByDateReq.setVersion("V1.0");
+        MyOkHttpUtil.postAsync(Constant.URL_1, GsonUtil.objectToJson(patientByDateReq), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resp = response.body().string();
+                mDatas.add(resp);
             }
         });
     }
