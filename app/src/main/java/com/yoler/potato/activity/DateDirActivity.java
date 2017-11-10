@@ -31,7 +31,7 @@ import okhttp3.Response;
 public class DateDirActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView bottomNavigationView;
-    private List<DateDirRespContent> dateDirDatas;
+    private List<DateDirRespContent> dateDirDatas =new ArrayList<>();
     private RecyclerView mRecyclerView;
     private RvDateDirAdapter mAdapter;
 
@@ -52,16 +52,16 @@ public class DateDirActivity extends BaseActivity implements BottomNavigationVie
         mAdapter = new RvDateDirAdapter(mActivity, dateDirDatas);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
+        getDateDirDatas();
     }
 
     private void testgetDateDirDatas() {
         List<DateDirRespContent> content = new ArrayList<>();
         DateDirRespContent dateDirRespContent = new DateDirRespContent();
         dateDirRespContent.setPatientCnt("1");
-        dateDirRespContent.setVisitingDate("2017-05-79");
+        dateDirRespContent.setVisitingDate("2017-05-19");
         content.add(dateDirRespContent);
-        dateDirDatas = content;
+        dateDirDatas.addAll(content);
     }
 
     private void getDateDirDatas() {
@@ -76,15 +76,24 @@ public class DateDirActivity extends BaseActivity implements BottomNavigationVie
         MyOkHttpUtil.postAsync(Constant.GET_DATE_DIR, GsonUtil.objectToJson(dateDirReq), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                ToastUtil.showToast(mActivity, getResources().getString(R.string.load_fail));
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mActivity, getResources().getString(R.string.load_fail));
+                    }
+                });
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) throws IOException {
                 String resp = response.body().string();
-                DateDirResp dateDirResp = GsonUtil.jsonToObject(resp, DateDirResp.class);
-                dateDirDatas = dateDirResp.getContent();
-                mAdapter.notifyDataSetChanged();
+                final DateDirResp dateDirResp = GsonUtil.jsonToObject(resp, DateDirResp.class);
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dateDirDatas.clear();
+                    }
+                });
             }
         });
 
