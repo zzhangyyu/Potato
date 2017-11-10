@@ -15,8 +15,8 @@
         android:layout_below="@id/title_view"
         android:layout_margin="5dp">
 
-        <com.marshalchen.ultimaterecyclerview.UltimateRecyclerView
-            android:id="@+id/ultimate_recycler_view"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/id_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

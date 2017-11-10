@@ -14,13 +14,14 @@ import com.yoler.potato.R;
  * @author zhangyu
  */
 public abstract class BaseActivity extends AppCompatActivity implements OnClickListener {
-
+    protected AppCompatActivity mActivity;
     private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
+        mActivity = this;
         btnBack = (Button) findViewById(R.id.btn_back);
         if (btnBack != null) {
             btnBack.setOnClickListener(new View.OnClickListener() {
