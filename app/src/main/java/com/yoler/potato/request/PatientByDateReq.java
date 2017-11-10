@@ -1,7 +1,5 @@
 package com.yoler.potato.request;
 
-import java.util.Date;
-
 public class PatientByDateReq extends BaseReq {
     private String pageIdx;
     private String recordPerPage;

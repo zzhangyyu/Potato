@@ -1,19 +1,7 @@
 package com.yoler.potato.util;
 
-import android.os.Handler;
-import android.os.Looper;
-
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Callback;
 import okhttp3.MediaType;

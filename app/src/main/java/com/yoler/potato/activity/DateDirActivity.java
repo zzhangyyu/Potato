@@ -11,28 +11,30 @@ import android.view.View;
 
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.yoler.potato.R;
-import com.yoler.potato.adapter.RvConsiliaByDateAdapter;
-import com.yoler.potato.request.PatientByDateReq;
+import com.yoler.potato.adapter.RvDateDirAdapter;
+import com.yoler.potato.request.DateDirReq;
+import com.yoler.potato.request.DateDirReqContent;
+import com.yoler.potato.response.DateDirResp;
+import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.Constant;
 import com.yoler.potato.util.GsonUtil;
+import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
-import com.yoler.potato.util.ToastUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ConsiliaByDateActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class DateDirActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private UltimateRecyclerView mView;
-    private List<String> mDatas = new ArrayList<>();
+    private List<DateDirRespContent> dateDirDatas;
     private Handler handler;
     private BottomNavigationView bottomNavigationView;
-    private RvConsiliaByDateAdapter mAdapter;
+    private RvDateDirAdapter mAdapter;
 
     @Override
     protected int getLayoutResource() {
@@ -42,12 +44,16 @@ public class ConsiliaByDateActivity extends BaseActivity implements BottomNaviga
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handler = new Handler();
-        mView = (UltimateRecyclerView) findViewById(R.id.ultimate_recycler_view);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
+        handler = new Handler();
+        mView = (UltimateRecyclerView) findViewById(R.id.ultimate_recycler_view);
+
+        getDateDirDatas();
+        LogUtil.d(GsonUtil.objectToJson(dateDirDatas));
         mView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new RvConsiliaByDateAdapter(this, mDatas);
+        mAdapter = new RvDateDirAdapter(this, dateDirDatas);
         mView.setAdapter(mAdapter);
         //StickyRecyclerHeadersDecoration stickyRecyclerHeadersDecoration = new StickyRecyclerHeadersDecoration(mAdapter);
         //mView.addItemDecoration(stickyRecyclerHeadersDecoration);
@@ -63,31 +69,32 @@ public class ConsiliaByDateActivity extends BaseActivity implements BottomNaviga
                 }, 2000);
             }
         });
-        getPatientByDate();
 
     }
 
-    private void getPatientByDate() {
-        PatientByDateReq patientByDateReq = new PatientByDateReq();
-        patientByDateReq.setPageIdx("1");
-        patientByDateReq.setRecordPerPage("20");
-        patientByDateReq.setQueryStartDate("2016-05-10");
-        patientByDateReq.setQueryEndDate("2017-11-08");
-        patientByDateReq.setOs("Android");
-        patientByDateReq.setPhone("15311496135");
-        patientByDateReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.URL_1, GsonUtil.objectToJson(patientByDateReq), new Callback() {
+    private void getDateDirDatas() {
+        DateDirReq dateDirReq = new DateDirReq();
+        DateDirReqContent dateDirReqContent = new DateDirReqContent();
+        dateDirReqContent.setPageIdx("1");
+        dateDirReqContent.setRecordPerPage("20");
+        dateDirReq.setContent(dateDirReqContent);
+        dateDirReq.setOs("Android");
+        dateDirReq.setPhone("15311496135");
+        dateDirReq.setVersion("V1.0");
+        MyOkHttpUtil.postAsync(Constant.GET_DATE_DIR, GsonUtil.objectToJson(dateDirReq), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String resp = response.body().string();
-                mDatas.add(resp);
+                DateDirResp dateDirResp = GsonUtil.jsonToObject(resp, DateDirResp.class);
+                dateDirDatas = dateDirResp.getContent();
             }
         });
+
     }
 
     @Override
@@ -98,36 +105,13 @@ public class ConsiliaByDateActivity extends BaseActivity implements BottomNaviga
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.recents) {
-            initData();
-            mAdapter.notifyDataSetChanged();
+
         } else if (item.getItemId() == R.id.favourites) {
-            initData2();
-            mAdapter.notifyDataSetChanged();
+
         } else if (item.getItemId() == R.id.nearby) {
-            initData3();
-            mAdapter.notifyDataSetChanged();
+
         }
         return true;
     }
 
-    protected void initData() {
-        mDatas.clear();
-        for (int i = 'A'; i < 'z'; i++) {
-            mDatas.add("" + (char) i);
-        }
-    }
-
-    protected void initData2() {
-        mDatas.clear();
-        for (int i = 1; i < 20; i++) {
-            mDatas.add("" + i);
-        }
-    }
-
-    protected void initData3() {
-        mDatas.clear();
-        for (int i = 30; i < 50; i++) {
-            mDatas.add("" + i);
-        }
-    }
 }
