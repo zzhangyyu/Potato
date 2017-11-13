@@ -1,5 +1,8 @@
 <resources>
+    <!--通用-->
     <string name="app_name">Potato</string>
     <string name="load_success">加载成功</string>
     <string name="load_fail">加载失败</string>
+    <!--Title-->
+    <string name="consilia_date_tile">病例</string>
 </resources>

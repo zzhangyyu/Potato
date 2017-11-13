@@ -28,8 +28,8 @@ public class MyOkHttpUtil {
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private MyOkHttpUtil() {
-        okHttpClient = new OkHttpClient();
-        okHttpClient.newBuilder()
+
+        okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)

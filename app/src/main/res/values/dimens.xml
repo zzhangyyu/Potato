@@ -36,4 +36,11 @@
     <dimen name="btn_padding_left">10dip</dimen>
     <dimen name="btn_padding_right">10dip</dimen>
 
+    <!-- margin -->
+    <dimen name="margin_all">5dip</dimen>
+    <dimen name="margin_top">5dip</dimen>
+    <dimen name="margin_bottom">5dip</dimen>
+    <dimen name="margin_left">10dip</dimen>
+    <dimen name="margin_right">10dip</dimen>
+
 </resources>

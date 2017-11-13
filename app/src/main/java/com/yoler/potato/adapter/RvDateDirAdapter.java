@@ -31,7 +31,7 @@ public class RvDateDirAdapter extends RecyclerView.Adapter<RvDateDirAdapter.Date
 
     @Override
     public DateDirViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = mLayoutInflater.inflate(R.layout.item_rv_date_dir, parent, false);
+        View v = mLayoutInflater.inflate(R.layout.item_rv_consilia_date_dir, parent, false);
         return new DateDirViewHolder(v);
     }
 
