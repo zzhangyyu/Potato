@@ -32,7 +32,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //底部导航栏
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         //Fragment
         initFragments();
@@ -79,7 +79,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(fragments.get(lastIndex));
         if (!fragments.get(index).isAdded()) {
-            transaction.add(R.id.content, fragments.get(index));
+            transaction.add(R.id.v_home_fragment, fragments.get(index));
         }
         transaction.show(fragments.get(index)).commitAllowingStateLoss();
     }
@@ -96,7 +96,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
         lastShowFragmentIndex = 0;
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.content, consiliaDateDirFragment)
+                .add(R.id.v_home_fragment, consiliaDateDirFragment)
                 .show(consiliaDateDirFragment)
                 .commit();
     }

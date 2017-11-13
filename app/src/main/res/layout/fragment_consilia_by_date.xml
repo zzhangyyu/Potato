@@ -9,7 +9,7 @@
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/v_navigation"
+        android:layout_above="@id/v_home_navigation"
         android:layout_below="@id/v_title"
         cube_ptr:ptr_duration_to_close="300"
         cube_ptr:ptr_duration_to_close_header="2000"
