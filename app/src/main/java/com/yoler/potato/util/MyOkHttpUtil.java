@@ -1,7 +1,16 @@
 package com.yoler.potato.util;
 
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -24,6 +33,8 @@ public class MyOkHttpUtil {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
+                .hostnameVerifier(new TrustAllHostnameVerifier())
+                .sslSocketFactory(initSSLSocketFactory(), initTrustManager())
                 .build();
     }
 
@@ -50,6 +61,59 @@ public class MyOkHttpUtil {
         getInstance().okHttpClient.newCall(request).enqueue(callBack);
     }
 
+
+    /**
+     * TrustManager
+     *
+     * @return
+     */
+    public static X509TrustManager initTrustManager() {
+        X509TrustManager mTrustManager = new X509TrustManager() {
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        };
+        return mTrustManager;
+    }
+
+    /**
+     * SSLSocketFactory
+     *
+     * @return
+     */
+    public static SSLSocketFactory initSSLSocketFactory() {
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContext.getInstance("SSL");
+            X509TrustManager[] xTrustArray = new X509TrustManager[]{initTrustManager()};
+            sslContext.init(null, xTrustArray, new SecureRandom());
+        } catch (Exception e) {
+            LogUtil.e(e.getMessage(),e);
+        }
+        return sslContext.getSocketFactory();
+    }
+
+    private static class TrustAllHostnameVerifier implements HostnameVerifier {
+        @Override
+        public boolean verify(String hostname, SSLSession session) {
+            return true;
+        }
+    }
+
 }
+
+
 
 

@@ -15,6 +15,9 @@
     <color name="gray">#d0d0d0</color>
     <color name="transparent">#00000000</color>
 
+    <!-- 背景颜色 -->
+    <color name="line_bg">#E4E4E4</color>
+
     <color name="btn_red_nor">#C02C35</color>
     <color name="btn_grey_nor">#E0E0E0</color>
 

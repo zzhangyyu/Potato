@@ -17,6 +17,7 @@ import com.yoler.potato.response.DateDirResp;
 import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.Constant;
 import com.yoler.potato.util.GsonUtil;
+import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
 import com.yoler.potato.util.ToastUtil;
 
@@ -31,7 +32,7 @@ import okhttp3.Response;
 public class DateDirActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView bottomNavigationView;
-    private List<DateDirRespContent> dateDirDatas =new ArrayList<>();
+    private List<DateDirRespContent> dateDirDatas = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private RvDateDirAdapter mAdapter;
 
@@ -44,24 +45,14 @@ public class DateDirActivity extends BaseActivity implements BottomNavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //底部导航栏
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_view);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        testgetDateDirDatas();
-        mRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_date_dir);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RvDateDirAdapter(mActivity, dateDirDatas);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         getDateDirDatas();
-    }
-
-    private void testgetDateDirDatas() {
-        List<DateDirRespContent> content = new ArrayList<>();
-        DateDirRespContent dateDirRespContent = new DateDirRespContent();
-        dateDirRespContent.setPatientCnt("1");
-        dateDirRespContent.setVisitingDate("2017-05-19");
-        content.add(dateDirRespContent);
-        dateDirDatas.addAll(content);
     }
 
     private void getDateDirDatas() {
@@ -75,11 +66,12 @@ public class DateDirActivity extends BaseActivity implements BottomNavigationVie
         dateDirReq.setVersion("V1.0");
         MyOkHttpUtil.postAsync(Constant.GET_DATE_DIR, GsonUtil.objectToJson(dateDirReq), new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         ToastUtil.showToast(mActivity, getResources().getString(R.string.load_fail));
+                        LogUtil.e(e.getMessage(), e);
                     }
                 });
             }
@@ -91,7 +83,9 @@ public class DateDirActivity extends BaseActivity implements BottomNavigationVie
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        dateDirDatas.clear();
+//                        dateDirDatas.clear();
+                        dateDirDatas.addAll(dateDirResp.getContent());
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
             }

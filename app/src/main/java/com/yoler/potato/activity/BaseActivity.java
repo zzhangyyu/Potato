@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.yoler.potato.R;
 
@@ -15,16 +16,16 @@ import com.yoler.potato.R;
  */
 public abstract class BaseActivity extends AppCompatActivity implements OnClickListener {
     protected AppCompatActivity mActivity;
-    private Button btnBack;
+    private ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         mActivity = this;
-        btnBack = (Button) findViewById(R.id.btn_back);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(new View.OnClickListener() {
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        if (ivBack != null) {
+            ivBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     finish();

@@ -21,4 +21,17 @@
         <item name="android:background">@drawable/btn_red_sel</item>
     </style>
 
+    <!-- 线条 -->
+    <style name="horizonal_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_height</item>
+        <item name="android:background">@color/line_bg</item>
+    </style>
+
+    <style name="vertical_line_style">
+        <item name="android:layout_width">@dimen/line_height</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/line_bg</item>
+    </style>
+
 </resources>
