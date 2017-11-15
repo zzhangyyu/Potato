@@ -16,7 +16,7 @@ public class ConsiliaPatientDirFragment extends BaseFragment {
 
 	@Override
 	protected int getLayoutResource() {
-		return R.layout.fragment_consilia_by_patient;
+		return R.layout.fragment_consilia_patient_dir;
 	}
 
 	@Override

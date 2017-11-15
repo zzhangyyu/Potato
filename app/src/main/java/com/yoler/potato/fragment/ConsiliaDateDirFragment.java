@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yoler.potato.R;
-import com.yoler.potato.adapter.RvDateDirAdapter;
-import com.yoler.potato.request.DateDirReq;
-import com.yoler.potato.request.DateDirReqContent;
+import com.yoler.potato.adapter.RvConsiliaDateDirAdapter;
+import com.yoler.potato.request.ConsiliaDateDirReq;
+import com.yoler.potato.request.ConsiliaDateDirReqContent;
 import com.yoler.potato.response.DateDirResp;
 import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.Constant;
@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 public class ConsiliaDateDirFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
-    private RvDateDirAdapter mAdapter;
+    private RvConsiliaDateDirAdapter mAdapter;
     private List<DateDirRespContent> dateDirDatas = new ArrayList<>();
 
     @Override
@@ -40,7 +40,7 @@ public class ConsiliaDateDirFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_consilia_by_date;
+        return R.layout.fragment_consilia_date_dir;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ConsiliaDateDirFragment extends BaseFragment {
         view = super.onCreateView(inflater, container, savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_date_dir);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mAdapter = new RvDateDirAdapter(mActivity, dateDirDatas);
+        mAdapter = new RvConsiliaDateDirAdapter(mActivity, dateDirDatas);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
         getDateDirDatas();
@@ -56,15 +56,15 @@ public class ConsiliaDateDirFragment extends BaseFragment {
     }
 
     private void getDateDirDatas() {
-        DateDirReq dateDirReq = new DateDirReq();
-        DateDirReqContent dateDirReqContent = new DateDirReqContent();
-        dateDirReqContent.setPageIdx("1");
-        dateDirReqContent.setRecordPerPage("20");
-        dateDirReq.setContent(dateDirReqContent);
-        dateDirReq.setOs("Android");
-        dateDirReq.setPhone("15311496135");
-        dateDirReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.GET_DATE_DIR, GsonUtil.objectToJson(dateDirReq), new Callback() {
+        ConsiliaDateDirReq consiliaDateDirReq = new ConsiliaDateDirReq();
+        ConsiliaDateDirReqContent consiliaDateDirReqContent = new ConsiliaDateDirReqContent();
+        consiliaDateDirReqContent.setPageIdx("1");
+        consiliaDateDirReqContent.setRecordPerPage("20");
+        consiliaDateDirReq.setContent(consiliaDateDirReqContent);
+        consiliaDateDirReq.setOs("Android");
+        consiliaDateDirReq.setPhone("15311496135");
+        consiliaDateDirReq.setVersion("V1.0");
+        MyOkHttpUtil.postAsync(Constant.GET_CONSILIA_DATE_DIR, GsonUtil.objectToJson(consiliaDateDirReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {

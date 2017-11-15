@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 
 import com.yoler.potato.R;
+import com.yoler.potato.activity.ConsiliaDateIntroActivity;
 import com.yoler.potato.response.DateDirRespContent;
+import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.ToastUtil;
 
 import java.util.List;
@@ -18,12 +20,12 @@ import java.util.List;
  * Created by Admin on 2016/10/31.
  */
 
-public class RvDateDirAdapter extends RecyclerView.Adapter<RvDateDirAdapter.DateDirViewHolder> {
+public class RvConsiliaDateDirAdapter extends RecyclerView.Adapter<RvConsiliaDateDirAdapter.DateDirViewHolder> {
     protected Context mContext;
     protected List<DateDirRespContent> dateDirDatas;
     private LayoutInflater mLayoutInflater;
 
-    public RvDateDirAdapter(Context context, List<DateDirRespContent> dateDirDatas) {
+    public RvConsiliaDateDirAdapter(Context context, List<DateDirRespContent> dateDirDatas) {
         this.mContext = context;
         this.dateDirDatas = dateDirDatas;
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -45,9 +47,10 @@ public class RvDateDirAdapter extends RecyclerView.Adapter<RvDateDirAdapter.Date
         dateDirViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos = dateDirViewHolder.getPosition();
-                String str = dateDirViewHolder.tvConsiliaDate.getText().toString();
-                ToastUtil.showToast(mContext, "you click " + str + " at " + pos);
+//                int pos = dateDirViewHolder.getPosition();
+//                String str = dateDirViewHolder.tvConsiliaDate.getText().toString();
+//                ToastUtil.showToast(mContext, "you click " + str + " at " + pos);
+                ActivityUtil.startActivity(mContext, ConsiliaDateIntroActivity.class);
             }
         });
 

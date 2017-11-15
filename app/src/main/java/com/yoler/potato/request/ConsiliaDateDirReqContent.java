@@ -1,6 +1,6 @@
 package com.yoler.potato.request;
 
-public class DateDirReqContent {
+public class ConsiliaDateDirReqContent {
     private String pageIdx;
     private String recordPerPage;
 

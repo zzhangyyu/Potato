@@ -1,6 +1,6 @@
 package com.yoler.potato.request;
 
-public class PatientByDateReq extends BaseReq {
+public class ConsiliaDateIntroReqContent {
     private String pageIdx;
     private String recordPerPage;
     private String queryStartDate;
