@@ -83,7 +83,6 @@ public class ConsiliaDateDirFragment extends BaseFragment {
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        dateDirDatas.clear();
                         dateDirDatas.addAll(dateDirResp.getContent());
                         mAdapter.notifyDataSetChanged();
                     }

@@ -1,14 +1,21 @@
 package com.yoler.potato.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.yoler.potato.R;
 import com.yoler.potato.adapter.RvConsiliaDateIntroAdapter;
 import com.yoler.potato.request.ConsiliaDateIntroReq;
 import com.yoler.potato.request.ConsiliaDateIntroReqContent;
+import com.yoler.potato.response.ConsiliaDateIntroResp;
+import com.yoler.potato.response.ConsiliaDateIntroRespPI;
 import com.yoler.potato.response.DateDirResp;
 import com.yoler.potato.response.DateDirRespContent;
+import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.Constant;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
@@ -25,8 +32,9 @@ import okhttp3.Response;
 
 public class ConsiliaDateIntroActivity extends BaseActivity {
 
-    private List<DateDirRespContent> dateDirDatas;
-    private RvConsiliaDateIntroAdapter rvConsiliaDateIntroAdapter;
+    private RecyclerView mRecyclerView;
+    private RvConsiliaDateIntroAdapter mAdapter;
+    private List<ConsiliaDateIntroRespPI> datas = new ArrayList<>();
 
     @Override
     protected int getLayoutResource() {
@@ -36,7 +44,13 @@ public class ConsiliaDateIntroActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String visitingDate = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "visitingDate");
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_consilia_date_intro);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        mAdapter = new RvConsiliaDateIntroAdapter(mActivity, datas);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
+        getConsiliaDateIntroDatas(visitingDate);
     }
 
     @Override
@@ -44,13 +58,13 @@ public class ConsiliaDateIntroActivity extends BaseActivity {
 
     }
 
-    private void getConsiliaDateIntroDatas() {
+    private void getConsiliaDateIntroDatas(String visitingDate) {
         ConsiliaDateIntroReq consiliaDateIntroReq = new ConsiliaDateIntroReq();
         ConsiliaDateIntroReqContent consiliaDateIntroReqContent = new ConsiliaDateIntroReqContent();
         consiliaDateIntroReqContent.setPageIdx("1");
         consiliaDateIntroReqContent.setRecordPerPage("20");
-        consiliaDateIntroReqContent.setQueryStartDate("2017-01-01");
-        consiliaDateIntroReqContent.setQueryEndDate("2017-11-15");
+        consiliaDateIntroReqContent.setQueryStartDate(visitingDate);
+        consiliaDateIntroReqContent.setQueryEndDate(visitingDate);
         consiliaDateIntroReq.setContent(consiliaDateIntroReqContent);
         consiliaDateIntroReq.setOs("Android");
         consiliaDateIntroReq.setPhone("15311496135");
@@ -70,12 +84,12 @@ public class ConsiliaDateIntroActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 String resp = response.body().string();
-                final DateDirResp dateDirResp = GsonUtil.jsonToObject(resp, DateDirResp.class);
+                final ConsiliaDateIntroResp consiliaDateIntroResp = GsonUtil.jsonToObject(resp, ConsiliaDateIntroResp.class);
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        dateDirDatas.addAll(dateDirResp.getContent());
-                        rvConsiliaDateIntroAdapter.notifyDataSetChanged();
+                        datas.addAll(consiliaDateIntroResp.getContent().get(0).getPatientInfos());
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
             }

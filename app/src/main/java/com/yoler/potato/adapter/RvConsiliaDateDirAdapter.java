@@ -1,6 +1,7 @@
 package com.yoler.potato.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,9 @@ public class RvConsiliaDateDirAdapter extends RecyclerView.Adapter<RvConsiliaDat
 //                int pos = dateDirViewHolder.getPosition();
 //                String str = dateDirViewHolder.tvConsiliaDate.getText().toString();
 //                ToastUtil.showToast(mContext, "you click " + str + " at " + pos);
-                ActivityUtil.startActivity(mContext, ConsiliaDateIntroActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("visitingDate", dateDirViewHolder.tvConsiliaDate.getText().toString());
+                ActivityUtil.startActivity(mContext, ConsiliaDateIntroActivity.class, extras);
             }
         });
 

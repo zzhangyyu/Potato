@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.yoler.potato.R;
 import com.yoler.potato.activity.ConsiliaDateIntroActivity;
+import com.yoler.potato.response.ConsiliaDateIntroRespPI;
 import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.ToastUtil;
@@ -21,44 +22,36 @@ import java.util.List;
 
 public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaDateIntroAdapter.DateIntroViewHolder> {
     protected Context mContext;
-    protected List<DateDirRespContent> dateDirDatas;
+    protected List<ConsiliaDateIntroRespPI> datas;
     private LayoutInflater mLayoutInflater;
 
-    public RvConsiliaDateIntroAdapter(Context context, List<DateDirRespContent> dateDirDatas) {
+    public RvConsiliaDateIntroAdapter(Context context, List<ConsiliaDateIntroRespPI> datas) {
         this.mContext = context;
-        this.dateDirDatas = dateDirDatas;
+        this.datas = datas;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
     @Override
     public DateIntroViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = mLayoutInflater.inflate(R.layout.item_rv_consilia_date_dir, parent, false);
+        View v = mLayoutInflater.inflate(R.layout.item_rv_consilia_date_intro, parent, false);
         return new DateIntroViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final DateIntroViewHolder dateIntroViewHolder, int position) {
-
-        dateIntroViewHolder.tvConsiliaNo.setText(position + 1 + "");
-        dateIntroViewHolder.tvConsiliaDate.setText(dateDirDatas.get(position).getVisitingDate());
-        dateIntroViewHolder.tvConsiliaCnt.setText(dateDirDatas.get(position).getPatientCnt());
-
+        dateIntroViewHolder.tvPatientName.setText(datas.get(position).getPatientName());
         dateIntroViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                int pos = dateDirViewHolder.getPosition();
-//                String str = dateDirViewHolder.tvConsiliaDate.getText().toString();
-//                ToastUtil.showToast(mContext, "you click " + str + " at " + pos);
-                ActivityUtil.startActivity(mContext, ConsiliaDateIntroActivity.class);
+                ToastUtil.showToast(mContext, "you short click ");
             }
         });
 
         dateIntroViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                int pos = dateIntroViewHolder.getPosition();
-                String str = dateIntroViewHolder.tvConsiliaDate.getText().toString();
-                ToastUtil.showToast(mContext, "you long click " + str + " at " + pos);
+
+                ToastUtil.showToast(mContext, "you long click ");
                 return true;
             }
         });
@@ -67,20 +60,20 @@ public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaD
 
     @Override
     public int getItemCount() {
-        return dateDirDatas == null ? 0 : dateDirDatas.size();
+        return datas == null ? 0 : datas.size();
     }
 
 
     class DateIntroViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvConsiliaDate;
-        public TextView tvConsiliaCnt;
-        public TextView tvConsiliaNo;
+        public TextView tvPatientName;
+        public TextView tvPatientSex;
+        public TextView tvTotalTimes;
 
         public DateIntroViewHolder(View itemView) {
             super(itemView);
-            tvConsiliaDate = (TextView) itemView.findViewById(R.id.item_rv_consilia_date);
-            tvConsiliaCnt = (TextView) itemView.findViewById(R.id.item_rv_consilia_cnt);
-            tvConsiliaNo = (TextView) itemView.findViewById(R.id.item_rv_consilia_no);
+            tvPatientName = (TextView) itemView.findViewById(R.id.item_tv_patient_name);
+            tvPatientSex = (TextView) itemView.findViewById(R.id.item_tv_patient_sex);
+            tvTotalTimes = (TextView) itemView.findViewById(R.id.item_tv_total_times);
         }
     }
 }
