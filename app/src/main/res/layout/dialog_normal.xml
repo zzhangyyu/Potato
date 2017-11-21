@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/dialog_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:gravity="center"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:textSize="@dimen/text_large"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="15dip"
+        android:gravity="center"
+        android:minHeight="30dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:textSize="@dimen/text_middle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="取消"
+            android:textSize="@dimen/text_large" />
+
+        <View
+            android:id="@+id/line_view"
+            style="@style/vertical_line_style"
+            android:background="#BCBCBC" />
+
+        <Button
+            android:id="@+id/sure_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="确定"
+            android:textSize="@dimen/text_large" />
+    </LinearLayout>
+
+</LinearLayout>

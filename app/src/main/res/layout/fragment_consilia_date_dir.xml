@@ -5,24 +5,25 @@
     android:background="#EDEDED"
     android:orientation="vertical">
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/v_home_navigation"
-        android:layout_below="@id/v_title"
-        cube_ptr:ptr_duration_to_close="300"
-        cube_ptr:ptr_duration_to_close_header="2000"
-        cube_ptr:ptr_keep_header_when_refresh="true"
-        cube_ptr:ptr_pull_to_fresh="false"
-        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-        cube_ptr:ptr_resistance="1.7">
+        android:layout_below="@id/v_title">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_consilia_date_dir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </RelativeLayout>

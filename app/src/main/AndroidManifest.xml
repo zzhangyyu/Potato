@@ -23,6 +23,11 @@
         <activity
             android:name=".activity.ConsiliaDateIntroActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".activity.ConsiliaDetailActivity"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>

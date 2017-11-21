@@ -11,12 +11,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.timessquare.CalendarPickerView;
+import com.yoler.potato.Dialog.CalendarDialogFragment;
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
 import com.yoler.potato.fragment.ConsiliaPatientDirFragment;
+import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HomeActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +29,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     private BottomNavigationView bottomNavigationView;
     private int lastShowFragmentIndex = 0;
     private ImageView ivBack;
+    private TextView tvCalendar;
     private TextView tvTitle;
     private List<Fragment> fragments = new ArrayList<>();
 
@@ -36,12 +41,14 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //底部导航栏
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
         ivBack = (ImageView) findViewById(R.id.iv_back);
+        tvCalendar = (TextView) findViewById(R.id.tv_calendar);
         tvTitle = (TextView) findViewById(R.id.tv_title);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        tvCalendar.setOnClickListener(this);
+
         tvTitle.setText(getResources().getText(R.string.consilia_date_tile));
         ivBack.setVisibility(View.GONE);
         //Fragment
@@ -50,7 +57,11 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void onClick(View view) {
-
+        if (view.getId() == tvCalendar.getId()) {
+            CalendarDialogFragment calendarDialogFragment = CalendarDialogFragment.getInstance(mActivity, "请选择日期");
+            calendarDialogFragment.setCancelable(true);
+            calendarDialogFragment.show();
+        }
     }
 
     @Override

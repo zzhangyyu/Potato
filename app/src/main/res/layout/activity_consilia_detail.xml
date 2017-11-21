@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_all_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名：" />
+
+        <TextView
+            android:id="@+id/tv_patient_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="王xx" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年龄：" />
+
+        <TextView
+            android:id="@+id/tv_patient_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生日：" />
+
+        <TextView
+            android:id="@+id/tv_patient_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1989-07-23（农历）" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="属相：" />
+
+        <TextView
+            android:id="@+id/tv_patient_zodiac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="羊" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="脉象：" />
+
+        <TextView
+            android:id="@+id/tv_patient_pulse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左关弦" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="舌象：" />
+
+        <TextView
+            android:id="@+id/tv_patient_tongue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..." />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="药方：" />
+
+        <TextView
+            android:id="@+id/tv_patient_prescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..." />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.yoler.potato.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.yoler.potato.R;
 import com.yoler.potato.activity.ConsiliaDateIntroActivity;
+import com.yoler.potato.activity.ConsiliaDetailActivity;
 import com.yoler.potato.response.ConsiliaDateIntroRespPI;
 import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.ActivityUtil;
@@ -40,17 +42,19 @@ public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaD
     @Override
     public void onBindViewHolder(final DateIntroViewHolder dateIntroViewHolder, int position) {
         dateIntroViewHolder.tvPatientName.setText(datas.get(position).getPatientName());
+        dateIntroViewHolder.tvPatientConditionId.setText(datas.get(position).getPatientConditionId());
         dateIntroViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(mContext, "you short click ");
+                Bundle extras = new Bundle();
+                extras.putString("patientConditionId", dateIntroViewHolder.tvPatientConditionId.getText().toString());
+                ActivityUtil.startActivity(mContext, ConsiliaDetailActivity.class, extras);
             }
         });
 
         dateIntroViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
                 ToastUtil.showToast(mContext, "you long click ");
                 return true;
             }
@@ -65,12 +69,14 @@ public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaD
 
 
     class DateIntroViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvPatientConditionId;
         public TextView tvPatientName;
         public TextView tvPatientSex;
         public TextView tvTotalTimes;
 
         public DateIntroViewHolder(View itemView) {
             super(itemView);
+            tvPatientConditionId = (TextView) itemView.findViewById(R.id.tv_patient_condition_id);
             tvPatientName = (TextView) itemView.findViewById(R.id.item_tv_patient_name);
             tvPatientSex = (TextView) itemView.findViewById(R.id.item_tv_patient_sex);
             tvTotalTimes = (TextView) itemView.findViewById(R.id.item_tv_total_times);

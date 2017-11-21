@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yoler.potato.R;
 import com.yoler.potato.adapter.RvConsiliaDateDirAdapter;
 import com.yoler.potato.request.ConsiliaDateDirReq;
@@ -30,6 +33,7 @@ import okhttp3.Response;
 
 public class ConsiliaDateDirFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
+    private RefreshLayout refreshView;
     private RvConsiliaDateDirAdapter mAdapter;
     private List<DateDirRespContent> dateDirDatas = new ArrayList<>();
 
@@ -47,15 +51,33 @@ public class ConsiliaDateDirFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_date_dir);
+        refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mAdapter = new RvConsiliaDateDirAdapter(mActivity, dateDirDatas);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
-        getDateDirDatas();
+        getInitDateDirDatas();
+
+
+        refreshView.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                getInitDateDirDatas();
+                refreshlayout.finishRefresh();
+            }
+        });
+        refreshView.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000);
+            }
+        });
+
+
         return view;
     }
 
-    private void getDateDirDatas() {
+    private void getInitDateDirDatas() {
         ConsiliaDateDirReq consiliaDateDirReq = new ConsiliaDateDirReq();
         ConsiliaDateDirReqContent consiliaDateDirReqContent = new ConsiliaDateDirReqContent();
         consiliaDateDirReqContent.setPageIdx("1");

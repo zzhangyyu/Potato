@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.yoler.potato.R;
@@ -13,8 +12,6 @@ import com.yoler.potato.request.ConsiliaDateIntroReq;
 import com.yoler.potato.request.ConsiliaDateIntroReqContent;
 import com.yoler.potato.response.ConsiliaDateIntroResp;
 import com.yoler.potato.response.ConsiliaDateIntroRespPI;
-import com.yoler.potato.response.DateDirResp;
-import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.Constant;
 import com.yoler.potato.util.GsonUtil;

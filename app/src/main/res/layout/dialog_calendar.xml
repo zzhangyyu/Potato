@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray">
+
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/margin_all"
+        android:gravity="center"
+        android:textSize="@dimen/text_middle"
+        android:textStyle="bold" />
+
+    <com.squareup.timessquare.CalendarPickerView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/view_click"
+        android:layout_below="@id/tv_dialog_title"
+        android:layout_marginTop="@dimen/margin_all"
+        android:scrollbars="none" />
+
+    <LinearLayout
+        android:id="@+id/view_click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="取消"
+            android:textSize="@dimen/text_middle" />
+
+        <View
+            android:id="@+id/line_view"
+            style="@style/vertical_line_style"
+            android:background="#BCBCBC" />
+
+        <Button
+            android:id="@+id/btn_sure"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="确定"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+
+</RelativeLayout>
