@@ -30,6 +30,11 @@
     <dimen name="top_small">5dip</dimen>
 
     <!-- padding -->
+    <dimen name="padding_all">10dip</dimen>
+    <dimen name="padding_top">5dip</dimen>
+    <dimen name="padding_bottom">5dip</dimen>
+    <dimen name="padding_left">10dip</dimen>
+    <dimen name="padding_right">10dip</dimen>
     <dimen name="btn_padding_all">10dip</dimen>
     <dimen name="btn_padding_top">5dip</dimen>
     <dimen name="btn_padding_bottom">5dip</dimen>

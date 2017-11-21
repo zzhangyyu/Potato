@@ -15,6 +15,12 @@
     <color name="gray">#E4E4E4</color>
     <color name="transparent">#00000000</color>
 
+    <!-- 字体颜色 -->
+    <color name="title_font">#3C3C3C</color>
+    <color name="dark_font">#3C3D3D</color>
+    <color name="light_font">#9D9E9E</color>
+    <color name="hint_font">#999999</color>
+
     <!-- 背景颜色 -->
     <color name="line_bg">#E4E4E4</color>
 

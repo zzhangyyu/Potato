@@ -2,7 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="@dimen/padding_top"
+    android:paddingBottom="@dimen/padding_bottom"
     android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_consilia_date_intro_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:text="01"
+        android:textColor="@color/dark_font" />
 
     <ImageView
         android:id="@+id/iv_more"
@@ -15,7 +27,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/iv_more">
+        android:layout_toLeftOf="@id/iv_more"
+        android:layout_toRightOf="@id/tv_consilia_date_intro_no">
 
         <TextView
             android:id="@+id/tv_patient_condition_id"
@@ -34,14 +47,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="姓名：" />
+                android:text="姓名："
+                android:textColor="@color/dark_font" />
 
             <TextView
                 android:id="@+id/item_tv_patient_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="李xx" />
+                android:text="李xx"
+                android:textColor="@color/light_font" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,14 +70,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="性别：" />
+                android:text="性别："
+                android:textColor="@color/dark_font" />
 
             <TextView
                 android:id="@+id/item_tv_patient_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="男" />
+                android:text="男"
+                android:textColor="@color/light_font" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,14 +93,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="历史就诊次数：" />
+                android:text="历史就诊次数："
+                android:textColor="@color/dark_font" />
 
             <TextView
                 android:id="@+id/item_tv_total_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="12" />
+                android:text="12"
+                android:textColor="@color/light_font" />
         </LinearLayout>
 
     </RelativeLayout>

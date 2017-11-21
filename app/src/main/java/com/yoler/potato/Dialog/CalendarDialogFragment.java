@@ -52,7 +52,7 @@ public class CalendarDialogFragment extends BaseDialogFragment {
         Date today = new Date();
 //        cpvCalendar.init(today, nextYear.getTime()).withSelectedDate(today);
         //默认是只选择一个日期，如果想要选择多个日期，使用下面这行代码
-        cpvCalendar.init(beforeYear.getTime(), nextYear.getTime()).inMode(CalendarPickerView.SelectionMode.RANGE);
+        cpvCalendar.init(beforeYear.getTime(), nextYear.getTime()).inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDate(today);
 
         //btn
         btnSure.setOnClickListener(this);
