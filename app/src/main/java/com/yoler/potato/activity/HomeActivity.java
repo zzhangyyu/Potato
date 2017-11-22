@@ -1,35 +1,30 @@
 package com.yoler.potato.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.timessquare.CalendarPickerView;
-import com.yoler.potato.Dialog.CalendarDialogFragment;
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
 import com.yoler.potato.fragment.ConsiliaPatientDirFragment;
-import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.ToastUtil;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class HomeActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-
+    private static Boolean isExit = false;
     private BottomNavigationView bottomNavigationView;
     private int lastShowFragmentIndex = 0;
     private ImageView ivBack;
-    private TextView tvCalendar;
     private TextView tvTitle;
     private List<Fragment> fragments = new ArrayList<>();
 
@@ -42,12 +37,10 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ivBack = (ImageView) findViewById(R.id.iv_back);
-        tvCalendar = (TextView) findViewById(R.id.tv_calendar);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        tvCalendar.setOnClickListener(this);
 
         tvTitle.setText(getResources().getText(R.string.consilia_date_tile));
         ivBack.setVisibility(View.GONE);
@@ -57,11 +50,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == tvCalendar.getId()) {
-            CalendarDialogFragment calendarDialogFragment = CalendarDialogFragment.getInstance(mActivity, "请选择日期");
-            calendarDialogFragment.setCancelable(true);
-            calendarDialogFragment.show();
-        }
+
     }
 
     @Override
@@ -120,6 +109,33 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
                 .add(R.id.v_home_fragment, consiliaDateDirFragment)
                 .show(consiliaDateDirFragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByDoubleClick();  //退出应用的操作
+        }
+        return false;
+    }
+
+    /**
+     * 双击退出应用
+     */
+    private void exitByDoubleClick() {
+        if (isExit == false) {
+            isExit = true; // 准备退出
+            ToastUtil.showToast(mActivity, "再按一次退出程序");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 3000);
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 
 }

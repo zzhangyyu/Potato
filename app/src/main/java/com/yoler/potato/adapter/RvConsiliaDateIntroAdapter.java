@@ -43,6 +43,7 @@ public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaD
     public void onBindViewHolder(final DateIntroViewHolder dateIntroViewHolder, int position) {
         dateIntroViewHolder.tvPatientName.setText(datas.get(position).getPatientName());
         dateIntroViewHolder.tvPatientConditionId.setText(datas.get(position).getPatientConditionId());
+        dateIntroViewHolder.tvPatientSex.setText(datas.get(position).getPatientSex());
         dateIntroViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +67,6 @@ public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaD
     public int getItemCount() {
         return datas == null ? 0 : datas.size();
     }
-
 
     class DateIntroViewHolder extends RecyclerView.ViewHolder {
         public TextView tvPatientConditionId;

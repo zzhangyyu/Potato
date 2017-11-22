@@ -14,6 +14,7 @@ import com.yoler.potato.R;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -27,11 +28,13 @@ public class CalendarDialogFragment extends BaseDialogFragment {
     private CalendarPickerView cpvCalendar;
     private Button btnCancel;
     private Button btnSure;
+    private OnEnsureDateSelectListener ensureDateSelectListener;
 
-    public static CalendarDialogFragment getInstance(FragmentActivity activity, String dialogTitle) {
+    public static CalendarDialogFragment getInstance(FragmentActivity activity, String dialogTitle, OnEnsureDateSelectListener ensureDateSelectListener) {
         CalendarDialogFragment fragment = new CalendarDialogFragment();
         fragment.mActivity = activity;
         fragment.dialogTitle = dialogTitle;
+        fragment.ensureDateSelectListener = ensureDateSelectListener;
         return fragment;
     }
 
@@ -77,9 +80,15 @@ public class CalendarDialogFragment extends BaseDialogFragment {
     @Override
     public void onClick(View v) {
         if (v.getId() == btnSure.getId()) {
+            List<Date> dateList = cpvCalendar.getSelectedDates();
+            ensureDateSelectListener.onEnsureDateSelect(dateList);
             this.dismiss();
         } else if (v.getId() == btnCancel.getId()) {
             this.dismiss();
         }
+    }
+
+    public interface OnEnsureDateSelectListener {
+        void onEnsureDateSelect(List<Date> selectedDates);
     }
 }

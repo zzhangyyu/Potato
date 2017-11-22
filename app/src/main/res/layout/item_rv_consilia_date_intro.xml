@@ -55,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="李xx"
                 android:textColor="@color/light_font" />
         </LinearLayout>
 
@@ -78,7 +77,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="男"
                 android:textColor="@color/light_font" />
         </LinearLayout>
 
@@ -101,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="12"
+                android:text="***"
                 android:textColor="@color/light_font" />
         </LinearLayout>
 

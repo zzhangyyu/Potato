@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.yoler.potato.R;
@@ -32,7 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
                 }
             });
         }
-
     }
 
     @Override
@@ -51,4 +49,5 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
     }
 
     protected abstract int getLayoutResource();
+
 }

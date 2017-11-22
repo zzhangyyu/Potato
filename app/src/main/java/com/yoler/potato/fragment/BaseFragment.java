@@ -3,6 +3,7 @@ package com.yoler.potato.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,7 +15,7 @@ import android.view.ViewGroup;
  * @author qinweixiang
  */
 public abstract class BaseFragment extends Fragment implements OnClickListener {
-    protected Activity mActivity;
+    protected FragmentActivity mActivity;
     protected View view;
 
     @Override
