@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="@dimen/padding_left"
         android:text="01"
         android:textColor="@color/dark_font" />
 
@@ -29,13 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/iv_more"
         android:layout_toRightOf="@id/tv_consilia_date_intro_no">
-
-        <TextView
-            android:id="@+id/tv_patient_condition_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/linear_1"

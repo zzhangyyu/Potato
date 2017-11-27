@@ -3,6 +3,7 @@ package com.yoler.potato.response;
 public class ConsiliaDetailRespContent {
     private String name;
     private String sex;
+    private String age;
     private String birthday;
     private String zodiac;
     private String visitingDate;
@@ -35,6 +36,14 @@ public class ConsiliaDetailRespContent {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getBirthday() {

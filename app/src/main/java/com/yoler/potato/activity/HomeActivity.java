@@ -10,7 +10,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
@@ -25,7 +24,6 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     private BottomNavigationView bottomNavigationView;
     private int lastShowFragmentIndex = 0;
     private ImageView ivBack;
-    private TextView tvTitle;
     private List<Fragment> fragments = new ArrayList<>();
 
     @Override
@@ -37,12 +35,8 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ivBack = (ImageView) findViewById(R.id.iv_back);
-        tvTitle = (TextView) findViewById(R.id.tv_title);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
-        tvTitle.setText(getResources().getText(R.string.consilia_date_tile));
         ivBack.setVisibility(View.GONE);
         //Fragment
         initFragments();

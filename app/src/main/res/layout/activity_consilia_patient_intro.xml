@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDED"
+    android:background="@color/gray"
     android:orientation="vertical">
+
+    <include layout="@layout/title_all_activity" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/v_home_navigation"
-        android:layout_below="@id/v_title">
+        android:layout_below="@id/v_title"
+        android:layout_marginTop="@dimen/margin_all">
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_consilia_patient_dir"
+            android:id="@+id/rv_consilia_patient_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -23,15 +23,17 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ConsiliaDetailActivity extends BaseActivity {
-
+    private TextView tvTitle;
     private TextView tvPpatientName;
-    private TextView tvPatientAge;
+    private TextView tvPatientSex;
     private TextView tvPatientBirthday;
     private TextView tvPatientZodiac;
     private TextView tvPatienPulse;
     private TextView tvPatientTongue;
-    private TextView tvPatientPrescription;
-
+    private TextView tvPrescriptionDetail;
+    private TextView tvPrescriptionCount;
+    private TextView tvPrescriptionMethod;
+    private TextView tvPrescriptionDuration;
 
     @Override
     protected int getLayoutResource() {
@@ -41,13 +43,18 @@ public class ConsiliaDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tvTitle = (TextView) findViewById(R.id.tv_title);
         tvPpatientName = (TextView) findViewById(R.id.tv_patient_name);
-        tvPatientAge = (TextView) findViewById(R.id.tv_patient_age);
+        tvPatientSex = (TextView) findViewById(R.id.tv_patient_sex);
         tvPatientBirthday = (TextView) findViewById(R.id.tv_patient_birthday);
         tvPatientZodiac = (TextView) findViewById(R.id.tv_patient_zodiac);
         tvPatienPulse = (TextView) findViewById(R.id.tv_patient_pulse);
         tvPatientTongue = (TextView) findViewById(R.id.tv_patient_tongue);
-        tvPatientPrescription = (TextView) findViewById(R.id.tv_patient_prescription);
+        tvPrescriptionDetail = (TextView) findViewById(R.id.tv_prescription_detail);
+        tvPrescriptionCount = (TextView) findViewById(R.id.tv_prescription_count);
+        tvPrescriptionMethod = (TextView) findViewById(R.id.tv_prescription_method);
+        tvPrescriptionDuration = (TextView) findViewById(R.id.tv_prescription_duration);
+        tvTitle.setText(getResources().getText(R.string.consilia_detail_title));
         String patientConditionId = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "patientConditionId");
         getConsiliaDetailDatas(patientConditionId);
     }
@@ -59,7 +66,7 @@ public class ConsiliaDetailActivity extends BaseActivity {
 
     private void getConsiliaDetailDatas(String patientConditionId) {
         final ConsiliaDetailReq consiliaDetailReq = new ConsiliaDetailReq();
-        ConsiliaDetailReqContent consiliaDetailReqContent = new ConsiliaDetailReqContent();
+        final ConsiliaDetailReqContent consiliaDetailReqContent = new ConsiliaDetailReqContent();
         consiliaDetailReqContent.setPatientConditionId(patientConditionId);
         consiliaDetailReq.setContent(consiliaDetailReqContent);
         consiliaDetailReq.setOs("Android");
@@ -86,12 +93,33 @@ public class ConsiliaDetailActivity extends BaseActivity {
                     public void run() {
                         ConsiliaDetailRespContent consiliaDetailRespContent = consiliaDetailResp.getContent();
                         tvPpatientName.setText(consiliaDetailRespContent.getName());
-                        tvPatientAge.setText(consiliaDetailRespContent.getSex());
+                        tvPatientSex.setText(consiliaDetailRespContent.getSex());
                         tvPatientBirthday.setText(consiliaDetailRespContent.getBirthday());
                         tvPatientZodiac.setText(consiliaDetailRespContent.getZodiac());
-                        tvPatienPulse.setText(consiliaDetailRespContent.getLeftPulseChi());
+                        StringBuffer pulse = new StringBuffer();
+                        pulse.append("左寸：");
+                        pulse.append(consiliaDetailRespContent.getLeftPulseCun());
+                        pulse.append("   ");
+                        pulse.append("左关：");
+                        pulse.append(consiliaDetailRespContent.getLeftPulseGuan());
+                        pulse.append("   ");
+                        pulse.append("左尺：");
+                        pulse.append(consiliaDetailRespContent.getLeftPulseChi());
+                        pulse.append("\r\n");
+                        pulse.append("右寸：");
+                        pulse.append(consiliaDetailRespContent.getRightPulseCun());
+                        pulse.append("   ");
+                        pulse.append("右关：");
+                        pulse.append(consiliaDetailRespContent.getRightPulseGuan());
+                        pulse.append("   ");
+                        pulse.append("右尺：");
+                        pulse.append(consiliaDetailRespContent.getRightPulseChi());
+                        tvPatienPulse.setText(pulse.toString());
                         tvPatientTongue.setText(consiliaDetailRespContent.getTongue());
-                        tvPatientPrescription.setText(consiliaDetailRespContent.getPrescriptionDetail());
+                        tvPrescriptionDetail.setText(consiliaDetailRespContent.getPrescriptionDetail());
+                        tvPrescriptionCount.setText(consiliaDetailRespContent.getPrescriptionCount());
+                        tvPrescriptionMethod.setText(consiliaDetailRespContent.getPrescriptionMethod());
+                        tvPrescriptionDuration.setText(consiliaDetailRespContent.getPrescriptionDuration());
                     }
                 });
             }

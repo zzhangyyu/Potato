@@ -28,6 +28,10 @@
             android:name=".activity.ConsiliaDetailActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".activity.ConsiliaPatientIntroActivity"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>

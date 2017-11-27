@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yoler.potato.R;
-import com.yoler.potato.activity.ConsiliaDateIntroActivity;
 import com.yoler.potato.activity.ConsiliaDetailActivity;
 import com.yoler.potato.response.ConsiliaDateIntroRespPI;
-import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.ToastUtil;
 
@@ -40,15 +38,14 @@ public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaD
     }
 
     @Override
-    public void onBindViewHolder(final DateIntroViewHolder dateIntroViewHolder, int position) {
+    public void onBindViewHolder(final DateIntroViewHolder dateIntroViewHolder, final int position) {
         dateIntroViewHolder.tvPatientName.setText(datas.get(position).getPatientName());
-        dateIntroViewHolder.tvPatientConditionId.setText(datas.get(position).getPatientConditionId());
         dateIntroViewHolder.tvPatientSex.setText(datas.get(position).getPatientSex());
         dateIntroViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle extras = new Bundle();
-                extras.putString("patientConditionId", dateIntroViewHolder.tvPatientConditionId.getText().toString());
+                extras.putString("patientConditionId", datas.get(position).getPatientConditionId());
                 ActivityUtil.startActivity(mContext, ConsiliaDetailActivity.class, extras);
             }
         });
@@ -69,14 +66,12 @@ public class RvConsiliaDateIntroAdapter extends RecyclerView.Adapter<RvConsiliaD
     }
 
     class DateIntroViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvPatientConditionId;
         public TextView tvPatientName;
         public TextView tvPatientSex;
         public TextView tvTotalTimes;
 
         public DateIntroViewHolder(View itemView) {
             super(itemView);
-            tvPatientConditionId = (TextView) itemView.findViewById(R.id.tv_patient_condition_id);
             tvPatientName = (TextView) itemView.findViewById(R.id.item_tv_patient_name);
             tvPatientSex = (TextView) itemView.findViewById(R.id.item_tv_patient_sex);
             tvTotalTimes = (TextView) itemView.findViewById(R.id.item_tv_total_times);

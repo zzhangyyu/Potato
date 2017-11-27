@@ -36,6 +36,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDialogFragment.OnEnsureDateSelectListener {
+    private TextView tvTitle;
     private RecyclerView mRecyclerView;
     private RefreshLayout refreshView;
     private RvConsiliaDateDirAdapter mAdapter;
@@ -55,14 +56,17 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
+        tvTitle = (TextView) getActivity().findViewById(R.id.tv_title);
         tvCalendar = (TextView) getActivity().findViewById(R.id.tv_calendar);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_date_dir);
         refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        tvTitle.setText(getResources().getText(R.string.consilia_date_title));
         mAdapter = new RvConsiliaDateDirAdapter(mActivity, dateDirDatas);
         mRecyclerView.setAdapter(mAdapter);
-        tvCalendar.setOnClickListener(this);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
+        tvCalendar.setVisibility(View.VISIBLE);
+        tvCalendar.setOnClickListener(this);
         getDateDirDatas(null, null, "1", true);
 
         refreshView.setOnRefreshListener(new OnRefreshListener() {
