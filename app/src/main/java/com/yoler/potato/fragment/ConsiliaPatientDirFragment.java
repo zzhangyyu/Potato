@@ -50,7 +50,7 @@ public class ConsiliaPatientDirFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
-        tvTitle = (TextView) getActivity().findViewById(R.id.tv_title);
+        tvTitle = (TextView) view.findViewById(R.id.tv_title);
         refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_patient_dir);
         tvTitle.setText(getResources().getText(R.string.consilia_patient_title));

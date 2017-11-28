@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/padding_top"
+    android:background="@color/white"
     android:paddingBottom="@dimen/padding_bottom"
-    android:background="@color/white">
+    android:paddingTop="@dimen/padding_top">
 
     <TextView
         android:id="@+id/tv_consilia_date_intro_no"
@@ -34,56 +34,38 @@
             android:id="@+id/linear_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="姓名："
-                android:textColor="@color/dark_font" />
 
             <TextView
                 android:id="@+id/item_tv_patient_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/light_font" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linear_1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="性别："
+                android:text="张xx"
+                android:layout_margin="10dp"
                 android:textColor="@color/dark_font" />
 
             <TextView
                 android:id="@+id/item_tv_patient_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/light_font" />
+                android:text="男"
+                android:layout_margin="10dp"
+                android:textColor="@color/dark_font" />
         </LinearLayout>
 
+
         <LinearLayout
-            android:id="@+id/linear_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linear_2"
+            android:layout_below="@id/linear_1"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="历史就诊次数："
                 android:textColor="@color/dark_font" />
 
@@ -91,7 +73,6 @@
                 android:id="@+id/item_tv_total_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="***"
                 android:textColor="@color/light_font" />
         </LinearLayout>

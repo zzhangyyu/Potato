@@ -56,8 +56,8 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
-        tvTitle = (TextView) getActivity().findViewById(R.id.tv_title);
-        tvCalendar = (TextView) getActivity().findViewById(R.id.tv_calendar);
+        tvTitle = (TextView) view.findViewById(R.id.tv_title);
+        tvCalendar = (TextView) view.findViewById(R.id.tv_calendar);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_date_dir);
         refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
@@ -65,7 +65,6 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
         mAdapter = new RvConsiliaDateDirAdapter(mActivity, dateDirDatas);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
-        tvCalendar.setVisibility(View.VISIBLE);
         tvCalendar.setOnClickListener(this);
         getDateDirDatas(null, null, "1", true);
 

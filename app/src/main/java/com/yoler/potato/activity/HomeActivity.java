@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
@@ -23,7 +22,6 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     private static Boolean isExit = false;
     private BottomNavigationView bottomNavigationView;
     private int lastShowFragmentIndex = 0;
-    private ImageView ivBack;
     private List<Fragment> fragments = new ArrayList<>();
 
     @Override
@@ -34,10 +32,8 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ivBack = (ImageView) findViewById(R.id.iv_back);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        ivBack.setVisibility(View.GONE);
         //Fragment
         initFragments();
     }
