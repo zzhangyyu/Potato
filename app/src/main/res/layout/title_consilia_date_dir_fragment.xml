@@ -5,17 +5,6 @@
     android:layout_height="@dimen/title_height"
     android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:paddingLeft="5dp"
-        android:paddingRight="10dp"
-        android:src="@drawable/ic_back" />
-
-
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
