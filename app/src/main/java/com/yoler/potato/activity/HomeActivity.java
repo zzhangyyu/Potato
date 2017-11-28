@@ -6,23 +6,30 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
 import com.yoler.potato.fragment.ConsiliaPatientDirFragment;
+import com.yoler.potato.util.MeasureUtil;
 import com.yoler.potato.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
     private static Boolean isExit = false;
+    private DrawerLayout mDrawerLayout;
     private BottomNavigationView bottomNavigationView;
     private int lastShowFragmentIndex = 0;
     private List<Fragment> fragments = new ArrayList<>();
+    private int mDrawerWidth;//抽屉全部拉出来时的宽度
+    private LinearLayout vContent;
+    private LinearLayout vDrawer;
 
     @Override
     protected int getLayoutResource() {
@@ -33,7 +40,14 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        vContent = (LinearLayout) findViewById(R.id.v_content);
+        vDrawer = (LinearLayout) findViewById(R.id.v_drawer);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        mDrawerLayout.addDrawerListener(this);
+
+        MeasureUtil.measureView(vDrawer);
+        mDrawerWidth = vDrawer.getMeasuredWidth();
         //Fragment
         initFragments();
     }
@@ -127,5 +141,26 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
             System.exit(0);
         }
     }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+        vContent.setScrollX((int) (-1 * slideOffset * mDrawerWidth));
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
+    }
+
 
 }
