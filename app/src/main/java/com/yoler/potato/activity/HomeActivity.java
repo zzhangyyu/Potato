@@ -39,17 +39,15 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);//底部导航栏view
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        vContent = (LinearLayout) findViewById(R.id.v_content);
-        vDrawer = (LinearLayout) findViewById(R.id.v_drawer);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        mDrawerLayout.addDrawerListener(this);
-
-        MeasureUtil.measureView(vDrawer);
+        vContent = (LinearLayout) findViewById(R.id.v_content);//主内容view
+        vDrawer = (LinearLayout) findViewById(R.id.v_drawer);//侧滑菜单view
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);//底部导航栏监听事件
+        mDrawerLayout.addDrawerListener(this);//侧滑菜单监听事件
+        MeasureUtil.measureView(vDrawer);//获取侧滑菜单的尺寸
         mDrawerWidth = vDrawer.getMeasuredWidth();
-        //Fragment
-        initFragments();
+        initFragments();//初始化Fragment
     }
 
     @Override
@@ -144,7 +142,10 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void onDrawerSlide(View drawerView, float slideOffset) {
-        vContent.setScrollX((int) (-1 * slideOffset * mDrawerWidth));
+        //slideOffset的范围是0.0~1.0，是相对整个抽屉宽度的比例
+        float scrollWidth = slideOffset * mDrawerWidth;
+        //setScroll中的参数，正数表示向左移动，负数向右
+        vContent.setScrollX((int) (-1 * scrollWidth));
     }
 
     @Override
