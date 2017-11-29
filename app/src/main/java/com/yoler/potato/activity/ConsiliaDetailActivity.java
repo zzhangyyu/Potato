@@ -41,8 +41,7 @@ public class ConsiliaDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void findViews() {
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvPpatientName = (TextView) findViewById(R.id.tv_patient_name);
         tvPatientSex = (TextView) findViewById(R.id.tv_patient_sex);
@@ -54,6 +53,11 @@ public class ConsiliaDetailActivity extends BaseActivity {
         tvPrescriptionCount = (TextView) findViewById(R.id.tv_prescription_count);
         tvPrescriptionMethod = (TextView) findViewById(R.id.tv_prescription_method);
         tvPrescriptionDuration = (TextView) findViewById(R.id.tv_prescription_duration);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         tvTitle.setText(getResources().getText(R.string.consilia_detail_title));
         String patientConditionId = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "patientConditionId");
         getConsiliaDetailDatas(patientConditionId);

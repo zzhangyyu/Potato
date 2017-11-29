@@ -39,10 +39,14 @@ public class ConsiliaPatientIntroActivity extends BaseActivity {
     }
 
     @Override
+    protected void findViews() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_consilia_patient_intro);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String patientInfoId = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "patientInfoId");
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_consilia_patient_intro);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mAdapter = new RvConsiliaPatientIntroAdapter(mActivity, datas);
         mRecyclerView.setAdapter(mAdapter);

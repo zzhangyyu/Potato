@@ -27,8 +27,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.support:design:25.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    compile 'com.google.code.gson:gson:2.8.1'
-    compile 'com.squareup:android-times-square:1.6.5@aar'
+    compile 'com.google.code.gson:gson:2.8.1'//Json格式化
+    compile 'com.squareup:android-times-square:1.6.5@aar'//日期控件
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     //compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'//没有使用特殊Header，可以不加这行
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.3'//底部导航栏
 }

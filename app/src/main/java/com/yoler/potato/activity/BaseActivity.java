@@ -21,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
+        findViews();
         mActivity = this;
         ivBack = (ImageView) findViewById(R.id.iv_back);
         if (ivBack != null) {
@@ -49,5 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
     }
 
     protected abstract int getLayoutResource();
+
+    protected abstract void findViews();
 
 }

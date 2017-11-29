@@ -39,10 +39,14 @@ public class ConsiliaDateIntroActivity extends BaseActivity {
     }
 
     @Override
+    protected void findViews() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_consilia_date_intro);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String visitingDate = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "visitingDate");
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_consilia_date_intro);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mAdapter = new RvConsiliaDateIntroAdapter(mActivity, datas);
         mRecyclerView.setAdapter(mAdapter);

@@ -2,16 +2,15 @@ package com.yoler.potato.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
 import com.yoler.potato.fragment.ConsiliaPatientDirFragment;
@@ -22,10 +21,10 @@ import com.yoler.potato.util.ToastUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
+public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerListener, BottomNavigationBar.OnTabSelectedListener {
     private static Boolean isExit = false;
     private DrawerLayout mDrawerLayout;
-    private BottomNavigationView bottomNavigationView;
+    private BottomNavigationBar bottomNavigationBar;
     private int lastShowFragmentIndex = 0;
     private List<Fragment> fragments = new ArrayList<>();
     private int mDrawerWidth;//抽屉全部拉出来时的宽度
@@ -38,13 +37,18 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.v_home_navigation);//底部导航栏view
+    protected void findViews() {
+        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.v_home_navigation);//底部导航栏view
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         vContent = (LinearLayout) findViewById(R.id.v_content);//主内容view
         vDrawer = (LinearLayout) findViewById(R.id.v_drawer);//侧滑菜单view
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);//底部导航栏监听事件
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initBottomNavigationBar();
+        bottomNavigationBar.setTabSelectedListener(this);
         mDrawerLayout.addDrawerListener(this);//侧滑菜单监听事件
         MeasureUtil.measureView(vDrawer);//获取侧滑菜单的尺寸
         mDrawerWidth = vDrawer.getMeasuredWidth();
@@ -56,31 +60,16 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.it_consilia_date_dir:
-                if (lastShowFragmentIndex != 0) {
-                    switchFrament(lastShowFragmentIndex, 0);
-                    lastShowFragmentIndex = 0;
-                }
-                return true;
-            case R.id.it_consilia_patient_dir:
-                if (lastShowFragmentIndex != 1) {
-                    switchFrament(lastShowFragmentIndex, 1);
-                    lastShowFragmentIndex = 1;
-                }
-                return true;
-            case R.id.nearby:
-                if (lastShowFragmentIndex != 2) {
-                    ToastUtil.showToast(mActivity, "待实现");
-                    lastShowFragmentIndex = 2;
-                }
-                return true;
-        }
-        return false;
+    private void initBottomNavigationBar() {
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_consilia_date_dir, "日期"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_consilia_patient_dir, "病人"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_nearby, "医生"))
+        ;
+        bottomNavigationBar.setBarBackgroundColor(R.color.white);//背景颜色
+        bottomNavigationBar.setInActiveColor(R.color.black);//未选中时的颜色
+        bottomNavigationBar.setActiveColor(R.color.colorPrimaryDark);//选中时的颜色
+        bottomNavigationBar.initialise();
     }
-
 
     /**
      * 切换Fragment
@@ -166,4 +155,38 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
     }
 
 
+    @Override
+    public void onTabSelected(int position) {
+        switch (position) {
+            case 0:
+                if (lastShowFragmentIndex != 0) {
+                    switchFrament(lastShowFragmentIndex, 0);
+                    lastShowFragmentIndex = 0;
+                }
+                return;
+            case 1:
+                if (lastShowFragmentIndex != 1) {
+                    switchFrament(lastShowFragmentIndex, 1);
+                    lastShowFragmentIndex = 1;
+                }
+                return;
+            case 2:
+                if (lastShowFragmentIndex != 2) {
+                    ToastUtil.showToast(mActivity, "待实现");
+                    lastShowFragmentIndex = 2;
+                }
+                return;
+        }
+
+    }
+
+    @Override
+    public void onTabUnselected(int position) {
+
+    }
+
+    @Override
+    public void onTabReselected(int position) {
+
+    }
 }

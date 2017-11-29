@@ -1,6 +1,5 @@
 package com.yoler.potato.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,7 +20,9 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = getActivity();
-        return inflater.inflate(getLayoutResource(), container, false);
+        view = inflater.inflate(getLayoutResource(), container, false);
+        findViews();
+        return view;
     }
 
     public void onResume() {
@@ -46,6 +47,8 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
      * @return
      */
     protected abstract int getLayoutResource();
+
+    protected abstract void findViews();
 
     @Override
     public void onClick(View v) {

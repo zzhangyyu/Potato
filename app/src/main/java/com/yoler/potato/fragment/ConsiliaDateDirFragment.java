@@ -60,9 +60,19 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
     }
 
     @Override
+    protected void findViews() {
+        tvTitle = (TextView) view.findViewById(R.id.tv_title);
+        mDrawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+        vDrawer = (LinearLayout) getActivity().findViewById(R.id.v_drawer);//主内容view
+        ivMenu = (ImageView) view.findViewById(R.id.iv_menu);
+        ivCalendar = (ImageView) view.findViewById(R.id.iv_calendar);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_date_dir);
+        refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
-        this.findViews();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         tvTitle.setText(getResources().getText(R.string.consilia_date_title));
         mAdapter = new RvConsiliaDateDirAdapter(mActivity, dateDirDatas);
@@ -112,18 +122,6 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
         }
     }
 
-    /**
-     * 获取view
-     */
-    private void findViews() {
-        tvTitle = (TextView) view.findViewById(R.id.tv_title);
-        mDrawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-        vDrawer = (LinearLayout) getActivity().findViewById(R.id.v_drawer);//主内容view
-        ivMenu = (ImageView) view.findViewById(R.id.iv_menu);
-        ivCalendar = (ImageView) view.findViewById(R.id.iv_calendar);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_date_dir);
-        refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
-    }
 
     /**
      * 获取按日期分类数据

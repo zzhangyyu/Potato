@@ -54,9 +54,18 @@ public class ConsiliaPatientDirFragment extends BaseFragment {
     }
 
     @Override
+    protected void findViews() {
+        mDrawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+        vDrawer = (LinearLayout) getActivity().findViewById(R.id.v_drawer);//主内容view
+        ivMenu = (ImageView) view.findViewById(R.id.iv_menu);
+        tvTitle = (TextView) view.findViewById(R.id.tv_title);
+        refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_patient_dir);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
-        findViews();
         tvTitle.setText(getResources().getText(R.string.consilia_patient_title));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mAdapter = new RvConsiliaPatientDirAdapter(mActivity, patientDirDatas);
@@ -67,17 +76,6 @@ public class ConsiliaPatientDirFragment extends BaseFragment {
         return view;
     }
 
-    /**
-     * 获取view
-     */
-    private void findViews() {
-        mDrawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-        vDrawer = (LinearLayout) getActivity().findViewById(R.id.v_drawer);//主内容view
-        ivMenu = (ImageView) view.findViewById(R.id.iv_menu);
-        tvTitle = (TextView) view.findViewById(R.id.tv_title);
-        refreshView = (RefreshLayout) view.findViewById(R.id.refresh_view);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_consilia_patient_dir);
-    }
 
     private void getPatientDirDatas(String pageIdx, final boolean needClear) {
         ConsiliaPatientDirReq consiliaPatientDirReq = new ConsiliaPatientDirReq();
