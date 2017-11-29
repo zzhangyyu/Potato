@@ -16,6 +16,7 @@ import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
 import com.yoler.potato.fragment.ConsiliaPatientDirFragment;
 import com.yoler.potato.util.MeasureUtil;
+import com.yoler.potato.util.SPUtil;
 import com.yoler.potato.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -135,6 +136,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
                 }
             }, 3000);
         } else {
+            SPUtil.clear(mActivity);
             finish();
             System.exit(0);
         }

@@ -177,4 +177,40 @@ public class DateFormatUtil {
         }
         return null;
     }
+
+    /**
+     * 往前或往后推算日
+     *
+     * @param date
+     * @param num
+     * @return
+     */
+    public static Date addDate(Date date, int num) {
+        if (null == date) {
+            return date;
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(date); // 设置当前日期
+        c.add(Calendar.DATE, num); // 日期加1天
+        date = c.getTime();
+        return date;
+    }
+
+    /**
+     * 往前或往后推算年
+     *
+     * @param date
+     * @param num
+     * @return
+     */
+    public static Date addYear(Date date, int num) {
+        if (null == date) {
+            return date;
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(date); // 设置当前日期
+        c.add(Calendar.YEAR, num); // 年加1天
+        date = c.getTime();
+        return date;
+    }
 }

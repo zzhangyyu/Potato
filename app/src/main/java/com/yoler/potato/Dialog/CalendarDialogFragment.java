@@ -10,9 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.squareup.timessquare.CalendarPickerView;
+import com.yoler.potato.Bean.DateDirSelectedDateBean;
 import com.yoler.potato.R;
+import com.yoler.potato.util.DateFormatUtil;
+import com.yoler.potato.util.SPUtil;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,16 +51,10 @@ public class CalendarDialogFragment extends BaseDialogFragment {
         btnSure = (Button) view.findViewById(R.id.btn_sure);
         cpvCalendar = (CalendarPickerView) view.findViewById(R.id.calendar_view);
         //日期控件
-        Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 1);
-        Calendar beforeYear = Calendar.getInstance();
-        beforeYear.add(Calendar.YEAR, -1);
         Date today = new Date();
-//        cpvCalendar.init(today, nextYear.getTime()).withSelectedDate(today);
-        //默认是只选择一个日期，如果想要选择多个日期，使用下面这行代码
-        cpvCalendar.init(beforeYear.getTime(), nextYear.getTime()).inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDate(today);
+        DateDirSelectedDateBean selectedDateBean = SPUtil.getPro(mActivity, "DateDirSelectedDateBean", DateDirSelectedDateBean.class);
+        cpvCalendar.init(DateFormatUtil.addYear(today, -1), DateFormatUtil.addDate(today, +1)).inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(getDateRange(selectedDateBean, today));
 
-        //btn
         btnSure.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
@@ -82,6 +79,9 @@ public class CalendarDialogFragment extends BaseDialogFragment {
         if (v.getId() == btnSure.getId()) {
             List<Date> dateList = cpvCalendar.getSelectedDates();
             ensureDateSelectListener.onEnsureDateSelect(dateList);
+            DateDirSelectedDateBean selectedDateBean = new DateDirSelectedDateBean();
+            selectedDateBean.setSelectedDateList(dateList);
+            SPUtil.putPro(mActivity, "DateDirSelectedDateBean", selectedDateBean);
             this.dismiss();
         } else if (v.getId() == btnCancel.getId()) {
             this.dismiss();
@@ -90,5 +90,20 @@ public class CalendarDialogFragment extends BaseDialogFragment {
 
     public interface OnEnsureDateSelectListener {
         void onEnsureDateSelect(List<Date> selectedDates);
+    }
+
+    private List<Date> getDateRange(DateDirSelectedDateBean selectedDateBean, Date today) {
+        List<Date> result = new ArrayList<>();
+        List<Date> selectedDateList = new ArrayList<>();
+        if (selectedDateBean != null) {
+            selectedDateList = selectedDateBean.getSelectedDateList();
+        }
+        if (selectedDateList.size() != 0) {
+            result.add(selectedDateList.get(0));
+            result.add(selectedDateList.get(selectedDateList.size() - 1));
+        } else {
+            result.add(today);
+        }
+        return result;
     }
 }
