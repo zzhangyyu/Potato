@@ -14,6 +14,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
 import com.yoler.potato.fragment.ConsiliaPatientDirFragment;
+import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.MeasureUtil;
 import com.yoler.potato.util.SPUtil;
 import com.yoler.potato.util.ToastUtil;
@@ -30,6 +31,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private int mDrawerWidth;//抽屉全部拉出来时的宽度
     private LinearLayout vContent;
     private LinearLayout vDrawer;
+    private LinearLayout vUserFavouritePatient;
 
     @Override
     protected int getLayoutResource() {
@@ -42,6 +44,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         vContent = (LinearLayout) findViewById(R.id.v_content);//主内容view
         vDrawer = (LinearLayout) findViewById(R.id.v_drawer);//侧滑菜单view
+        vUserFavouritePatient = (LinearLayout) findViewById(R.id.v_user_favourite_patient);
     }
 
     @Override
@@ -49,6 +52,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         super.onCreate(savedInstanceState);
         initBottomNavigationBar();
         bottomNavigationBar.setTabSelectedListener(this);
+        vUserFavouritePatient.setOnClickListener(this);
         mDrawerLayout.addDrawerListener(this);//侧滑菜单监听事件
         MeasureUtil.measureView(vDrawer);//获取侧滑菜单的尺寸
         mDrawerWidth = vDrawer.getMeasuredWidth();
@@ -57,7 +61,12 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void onClick(View view) {
-
+        if (view.getId() == vUserFavouritePatient.getId()) {
+            if (mDrawerLayout.isDrawerOpen(vDrawer)) {
+                mDrawerLayout.closeDrawer(vDrawer);
+                ActivityUtil.startActivity(mActivity, UserFavouritePatientActivity.class);
+            }
+        }
     }
 
     private void initBottomNavigationBar() {

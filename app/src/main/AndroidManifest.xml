@@ -32,6 +32,10 @@
             android:name=".activity.ConsiliaPatientIntroActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".activity.UserFavouritePatientActivity"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>
