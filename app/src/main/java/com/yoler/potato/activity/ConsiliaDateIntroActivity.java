@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yoler.potato.R;
 import com.yoler.potato.adapter.RvConsiliaDateIntroAdapter;
 import com.yoler.potato.request.ConsiliaDateIntroReq;
@@ -27,7 +28,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ConsiliaDateIntroActivity extends BaseActivity {
+public class ConsiliaDateIntroActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private RvConsiliaDateIntroAdapter mAdapter;
@@ -47,10 +48,18 @@ public class ConsiliaDateIntroActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String visitingDate = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "visitingDate");
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mAdapter = new RvConsiliaDateIntroAdapter(mActivity, datas);
-        mRecyclerView.setAdapter(mAdapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new RvConsiliaDateIntroAdapter(R.layout.item_rv_consilia_date_intro, datas);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
+        mAdapter.setUpFetchEnable(false);
+        mAdapter.setEnableLoadMore(false);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(this);
+
         getConsiliaDateIntroDatas(visitingDate);
     }
 
@@ -96,5 +105,12 @@ public class ConsiliaDateIntroActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Bundle extras = new Bundle();
+        extras.putString("patientConditionId", datas.get(position).getPatientConditionId());
+        ActivityUtil.startActivity(mActivity, ConsiliaDetailActivity.class, extras);
     }
 }

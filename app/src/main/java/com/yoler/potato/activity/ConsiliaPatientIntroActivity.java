@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yoler.potato.R;
 import com.yoler.potato.adapter.RvConsiliaPatientIntroAdapter;
 import com.yoler.potato.request.ConsiliaPatientIntroReq;
@@ -27,7 +28,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ConsiliaPatientIntroActivity extends BaseActivity {
+public class ConsiliaPatientIntroActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private RvConsiliaPatientIntroAdapter mAdapter;
@@ -47,10 +48,18 @@ public class ConsiliaPatientIntroActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String patientInfoId = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "patientInfoId");
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mAdapter = new RvConsiliaPatientIntroAdapter(mActivity, datas);
-        mRecyclerView.setAdapter(mAdapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new RvConsiliaPatientIntroAdapter(R.layout.item_rv_consilia_patient_intro, datas);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
+        mAdapter.setUpFetchEnable(false);
+        mAdapter.setEnableLoadMore(false);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(this);
+
         getConsiliaDateIntroDatas(patientInfoId);
     }
 
@@ -93,5 +102,12 @@ public class ConsiliaPatientIntroActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Bundle extras = new Bundle();
+        extras.putString("patientConditionId", datas.get(position).getPatientConditionId());
+        ActivityUtil.startActivity(mActivity, ConsiliaDetailActivity.class, extras);
     }
 }

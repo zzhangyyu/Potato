@@ -12,16 +12,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yoler.potato.Dialog.CalendarDialogFragment;
 import com.yoler.potato.R;
+import com.yoler.potato.activity.ConsiliaDateIntroActivity;
 import com.yoler.potato.adapter.RvConsiliaDateDirAdapter;
 import com.yoler.potato.request.ConsiliaDateDirReq;
 import com.yoler.potato.request.ConsiliaDateDirReqContent;
 import com.yoler.potato.response.DateDirResp;
 import com.yoler.potato.response.DateDirRespContent;
+import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.Constant;
 import com.yoler.potato.util.DateFormatUtil;
 import com.yoler.potato.util.GsonUtil;
@@ -38,7 +41,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDialogFragment.OnEnsureDateSelectListener {
+public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDialogFragment.OnEnsureDateSelectListener, BaseQuickAdapter.OnItemClickListener {
     private TextView tvTitle;
     private RecyclerView mRecyclerView;
     private RefreshLayout refreshView;
@@ -73,13 +76,21 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         tvTitle.setText(getResources().getText(R.string.consilia_date_title));
-        mAdapter = new RvConsiliaDateDirAdapter(mActivity, dateDirDatas);
-        mRecyclerView.setAdapter(mAdapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new RvConsiliaDateDirAdapter(R.layout.item_rv_consilia_date_dir, dateDirDatas);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
+        mAdapter.setUpFetchEnable(false);
+        mAdapter.setEnableLoadMore(false);
+        mRecyclerView.setAdapter(mAdapter);
+
         ivCalendar.setOnClickListener(this);
         ivMenu.setOnClickListener(this);
+        mAdapter.setOnItemClickListener(this);
+
         getDateDirDatas(null, null, "1", true);
 
         refreshView.setOnRefreshListener(new OnRefreshListener() {
@@ -170,5 +181,12 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
                 });
             }
         });
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Bundle extras = new Bundle();
+        extras.putString("visitingDate", dateDirDatas.get(position).getVisitingDate());
+        ActivityUtil.startActivity(mActivity, ConsiliaDateIntroActivity.class, extras);
     }
 }

@@ -12,13 +12,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.yoler.potato.R;
+import com.yoler.potato.activity.ConsiliaPatientIntroActivity;
 import com.yoler.potato.adapter.RvConsiliaPatientDirAdapter;
 import com.yoler.potato.request.ConsiliaPatientDirReq;
 import com.yoler.potato.request.ConsiliaPatientDirReqContent;
 import com.yoler.potato.response.PatientDirResp;
 import com.yoler.potato.response.PatientDirRespContent;
+import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.Constant;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
@@ -33,7 +36,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ConsiliaPatientDirFragment extends BaseFragment {
+public class ConsiliaPatientDirFragment extends BaseFragment implements BaseQuickAdapter.OnItemClickListener {
     private TextView tvTitle;
     private RecyclerView mRecyclerView;
     private RefreshLayout refreshView;
@@ -67,11 +70,19 @@ public class ConsiliaPatientDirFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
         tvTitle.setText(getResources().getText(R.string.consilia_patient_title));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mAdapter = new RvConsiliaPatientDirAdapter(mActivity, patientDirDatas);
-        mRecyclerView.setAdapter(mAdapter);
-        ivMenu.setOnClickListener(this);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new RvConsiliaPatientDirAdapter(R.layout.item_rv_consilia_patient_dir, patientDirDatas);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
+        mAdapter.setUpFetchEnable(false);
+        mAdapter.setEnableLoadMore(false);
+        mRecyclerView.setAdapter(mAdapter);
+
+        ivMenu.setOnClickListener(this);
+        mAdapter.setOnItemClickListener(this);
+
         getPatientDirDatas(null, true);
         return view;
     }
@@ -124,5 +135,12 @@ public class ConsiliaPatientDirFragment extends BaseFragment {
                 mDrawerLayout.openDrawer(vDrawer);
             }
         }
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Bundle extras = new Bundle();
+        extras.putString("patientInfoId", patientDirDatas.get(position).getPatientInfoId());
+        ActivityUtil.startActivity(mActivity, ConsiliaPatientIntroActivity.class, extras);
     }
 }
