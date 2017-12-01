@@ -15,4 +15,6 @@ public class Constant {
     public final static String GET_CONSILIA_PATIENT_INTRO = URL_PREFIX_HTTPS + "/patient/getConsiliaPatientIntro";
 
     public final static String GET_CONSILIA_DETAIL = URL_PREFIX_HTTPS + "/patient/getConsiliaDetail";
+
+    public final static String GET_USER_FAVOURITE_PATIENT= URL_PREFIX_HTTPS + "/user/getUserFavourite";
 }

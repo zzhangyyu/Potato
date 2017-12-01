@@ -24,13 +24,4 @@
         android:textColor="@color/title_font"
         android:textSize="@dimen/text_middle" />
 
-    <ImageView
-        android:id="@+id/iv_look"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:paddingRight="@dimen/padding_right"
-        android:src="@drawable/ic_normal_look" />
-
 </RelativeLayout>

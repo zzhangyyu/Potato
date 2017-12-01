@@ -5,6 +5,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yoler.potato.R;
@@ -29,7 +30,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ConsiliaDateIntroActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
-
+    private TextView tvTitle;
     private RecyclerView mRecyclerView;
     private RvConsiliaDateIntroAdapter mAdapter;
     private List<ConsiliaDateIntroRespPI> datas = new ArrayList<>();
@@ -41,12 +42,14 @@ public class ConsiliaDateIntroActivity extends BaseActivity implements BaseQuick
 
     @Override
     protected void findViews() {
+        tvTitle = (TextView) findViewById(R.id.tv_title);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_consilia_date_intro);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tvTitle.setText(getResources().getText(R.string.consilia_date_intro_title));
         String visitingDate = ActivityUtil.getIntentStringParams(mActivity, savedInstanceState, "visitingDate");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);

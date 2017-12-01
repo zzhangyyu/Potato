@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:paddingLeft="@dimen/padding_left"
-        android:src="@drawable/ic_menu" />
+        android:src="@drawable/ic_normal_menu" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -31,6 +31,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:paddingRight="@dimen/padding_right"
-        android:src="@drawable/ic_date" />
+        android:src="@drawable/ic_normal_date" />
 
 </RelativeLayout>

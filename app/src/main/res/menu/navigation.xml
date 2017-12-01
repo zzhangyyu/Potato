@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/it_consilia_date_dir"
-        android:icon="@drawable/ic_consilia_date_dir"
+        android:icon="@drawable/ic_bar_consilia_date_dir"
         android:title="日期" />
 
     <item
         android:id="@+id/it_consilia_patient_dir"
-        android:icon="@drawable/ic_consilia_patient_dir"
+        android:icon="@drawable/ic_bar_consilia_patient_dir"
         android:title="病人" />
 
     <item
         android:id="@+id/nearby"
-        android:icon="@drawable/ic_nearby"
+        android:icon="@drawable/ic_bar_library"
         android:title="医生" />
 </menu>

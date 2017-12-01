@@ -14,6 +14,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.yoler.potato.R;
 import com.yoler.potato.fragment.ConsiliaDateDirFragment;
 import com.yoler.potato.fragment.ConsiliaPatientDirFragment;
+import com.yoler.potato.fragment.LibraryFragment;
 import com.yoler.potato.util.ActivityUtil;
 import com.yoler.potato.util.MeasureUtil;
 import com.yoler.potato.util.SPUtil;
@@ -70,9 +71,9 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     private void initBottomNavigationBar() {
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_consilia_date_dir, "日期"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_consilia_patient_dir, "病人"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_nearby, "医生"))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_bar_consilia_date_dir, "日期"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_bar_consilia_patient_dir, "病人"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_bar_library, "医生"))
         ;
         bottomNavigationBar.setBarBackgroundColor(R.color.white);//背景颜色
         bottomNavigationBar.setInActiveColor(R.color.black);//未选中时的颜色
@@ -101,9 +102,10 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private void initFragments() {
         ConsiliaDateDirFragment consiliaDateDirFragment = new ConsiliaDateDirFragment();
         ConsiliaPatientDirFragment consiliaPatientDirFragment = new ConsiliaPatientDirFragment();
+        LibraryFragment libraryFragment = new LibraryFragment();
         fragments.add(consiliaDateDirFragment);
         fragments.add(consiliaPatientDirFragment);
-        fragments.add(consiliaDateDirFragment);
+        fragments.add(libraryFragment);
         lastShowFragmentIndex = 0;
         getSupportFragmentManager()
                 .beginTransaction()
@@ -181,7 +183,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 return;
             case 2:
                 if (lastShowFragmentIndex != 2) {
-                    ToastUtil.showToast(mActivity, "待实现");
+                    switchFrament(lastShowFragmentIndex, 2);
                     lastShowFragmentIndex = 2;
                 }
                 return;

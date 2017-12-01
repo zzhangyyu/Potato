@@ -22,7 +22,7 @@
         android:layout_height="25dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_more" />
+        android:src="@drawable/ic_normal_more" />
 
     <RelativeLayout
         android:layout_width="match_parent"
