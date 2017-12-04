@@ -1,4 +1,4 @@
-package com.yoler.potato.Dialog;
+package com.yoler.potato.dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.squareup.timessquare.CalendarPickerView;
-import com.yoler.potato.Bean.DateDirSelectedDateBean;
+import com.yoler.potato.bean.DateDirSelectedDateBean;
 import com.yoler.potato.R;
 import com.yoler.potato.util.DateFormatUtil;
 import com.yoler.potato.util.SPUtil;

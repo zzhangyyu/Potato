@@ -23,6 +23,8 @@
 
     <!-- 背景颜色 -->
     <color name="line_bg">#E4E4E4</color>
+    <color name="bar_active">#13227a</color>
+    <color name="bar_inactive">#707070</color>
 
     <color name="btn_red_nor">#C02C35</color>
     <color name="btn_grey_nor">#E0E0E0</color>

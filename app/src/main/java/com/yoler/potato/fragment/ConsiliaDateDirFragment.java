@@ -16,7 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.yoler.potato.Dialog.CalendarDialogFragment;
+import com.yoler.potato.dialog.CalendarDialogFragment;
 import com.yoler.potato.R;
 import com.yoler.potato.activity.ConsiliaDateIntroActivity;
 import com.yoler.potato.adapter.RvConsiliaDateDirAdapter;

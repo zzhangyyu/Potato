@@ -9,5 +9,6 @@
     <string name="consilia_patient_title">按病人</string>
     <string name="consilia_patient_intro_title">就诊记录</string>
     <string name="consilia_detail_title">诊断书</string>
+    <string name="library">图书馆</string>
     <string name="user_favourite_patient_title">我的收藏</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.yoler.potato.Dialog;
+package com.yoler.potato.dialog;
 
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;

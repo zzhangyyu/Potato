@@ -1,4 +1,4 @@
-package com.yoler.potato.Bean;
+package com.yoler.potato.bean;
 
 import java.util.Date;
 import java.util.List;

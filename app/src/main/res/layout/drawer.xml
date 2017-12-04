@@ -10,18 +10,39 @@
 
 
     <ImageView
+        android:id="@+id/iv_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:padding="@dimen/padding_all"
-        android:src="@drawable/ic_user_login_on" />
+        android:src="@drawable/ic_default_avatar" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="登录"
-        android:textSize="@dimen/text_big" />
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_sign_in"
+            style="@style/btn_common_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_all"
+            android:layout_weight="1"
+            android:text="登录" />
+
+        <Button
+            android:id="@+id/btn_sign_up"
+            style="@style/btn_common_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_all"
+            android:layout_weight="1"
+            android:text="注册" />
+
+    </LinearLayout>
+
 
     <View
         style="@style/horizonal_line_style"

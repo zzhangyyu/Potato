@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -33,6 +34,8 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private LinearLayout vContent;
     private LinearLayout vDrawer;
     private LinearLayout vUserFavouritePatient;
+    private Button btnSignIn;
+    private Button btnSignUp;
 
     @Override
     protected int getLayoutResource() {
@@ -46,6 +49,8 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         vContent = (LinearLayout) findViewById(R.id.v_content);//主内容view
         vDrawer = (LinearLayout) findViewById(R.id.v_drawer);//侧滑菜单view
         vUserFavouritePatient = (LinearLayout) findViewById(R.id.v_user_favourite_patient);
+        btnSignIn = (Button) findViewById(R.id.btn_sign_in);
+        btnSignUp = (Button) findViewById(R.id.btn_sign_up);
     }
 
     @Override
@@ -55,6 +60,8 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         bottomNavigationBar.setTabSelectedListener(this);
         vUserFavouritePatient.setOnClickListener(this);
         mDrawerLayout.addDrawerListener(this);//侧滑菜单监听事件
+        btnSignIn.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
         MeasureUtil.measureView(vDrawer);//获取侧滑菜单的尺寸
         mDrawerWidth = vDrawer.getMeasuredWidth();
         initFragments();//初始化Fragment
@@ -63,55 +70,21 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public void onClick(View view) {
         if (view.getId() == vUserFavouritePatient.getId()) {
+            ActivityUtil.startActivity(mActivity, UserFavouritePatientActivity.class);
             if (mDrawerLayout.isDrawerOpen(vDrawer)) {
                 mDrawerLayout.closeDrawer(vDrawer);
-                ActivityUtil.startActivity(mActivity, UserFavouritePatientActivity.class);
+            }
+        } else if (view.getId() == btnSignIn.getId()) {
+            ActivityUtil.startActivity(mActivity, SignInActivity.class);
+            if (mDrawerLayout.isDrawerOpen(vDrawer)) {
+                mDrawerLayout.closeDrawer(vDrawer);
+            }
+        } else if (view.getId() == btnSignUp.getId()) {
+            ActivityUtil.startActivity(mActivity, SignUpActivity.class);
+            if (mDrawerLayout.isDrawerOpen(vDrawer)) {
+                mDrawerLayout.closeDrawer(vDrawer);
             }
         }
-    }
-
-    private void initBottomNavigationBar() {
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_bar_consilia_date_dir, "日期"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_bar_consilia_patient_dir, "病人"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_bar_library, "医生"))
-        ;
-        bottomNavigationBar.setBarBackgroundColor(R.color.white);//背景颜色
-        bottomNavigationBar.setInActiveColor(R.color.black);//未选中时的颜色
-        bottomNavigationBar.setActiveColor(R.color.colorPrimaryDark);//选中时的颜色
-        bottomNavigationBar.initialise();
-    }
-
-    /**
-     * 切换Fragment
-     *
-     * @param lastIndex 上个显示Fragment的索引
-     * @param index     需要显示的Fragment的索引
-     */
-    private void switchFrament(int lastIndex, int index) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.hide(fragments.get(lastIndex));
-        if (!fragments.get(index).isAdded()) {
-            transaction.add(R.id.v_home_fragment, fragments.get(index));
-        }
-        transaction.show(fragments.get(index)).commitAllowingStateLoss();
-    }
-
-    /**
-     * 初始化Fragment
-     */
-    private void initFragments() {
-        ConsiliaDateDirFragment consiliaDateDirFragment = new ConsiliaDateDirFragment();
-        ConsiliaPatientDirFragment consiliaPatientDirFragment = new ConsiliaPatientDirFragment();
-        LibraryFragment libraryFragment = new LibraryFragment();
-        fragments.add(consiliaDateDirFragment);
-        fragments.add(consiliaPatientDirFragment);
-        fragments.add(libraryFragment);
-        lastShowFragmentIndex = 0;
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.v_home_fragment, consiliaDateDirFragment)
-                .show(consiliaDateDirFragment)
-                .commit();
     }
 
     @Override
@@ -120,26 +93,6 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
             exitByDoubleClick();  //退出应用的操作
         }
         return false;
-    }
-
-    /**
-     * 双击退出应用
-     */
-    private void exitByDoubleClick() {
-        if (isExit == false) {
-            isExit = true; // 准备退出
-            ToastUtil.showToast(mActivity, "再按一次退出程序");
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    isExit = false;
-                }
-            }, 3000);
-        } else {
-            SPUtil.clear(mActivity);
-            finish();
-            System.exit(0);
-        }
     }
 
     @Override
@@ -200,4 +153,71 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onTabReselected(int position) {
 
     }
+
+    /**
+     * 初始化底部导航栏
+     */
+    private void initBottomNavigationBar() {
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_bar_consilia_date_dir, "日期"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_bar_consilia_patient_dir, "病人"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_bar_library, "图书馆"));
+        bottomNavigationBar.setBarBackgroundColor(R.color.white);//背景颜色
+        bottomNavigationBar.setInActiveColor(R.color.bar_inactive);//未选中时的颜色
+        bottomNavigationBar.setActiveColor(R.color.bar_active);//选中时的颜色
+        bottomNavigationBar.initialise();
+    }
+
+    /**
+     * 切换Fragment
+     *
+     * @param lastIndex 上个显示Fragment的索引
+     * @param index     需要显示的Fragment的索引
+     */
+    private void switchFrament(int lastIndex, int index) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(fragments.get(lastIndex));
+        if (!fragments.get(index).isAdded()) {
+            transaction.add(R.id.v_home_fragment, fragments.get(index));
+        }
+        transaction.show(fragments.get(index)).commitAllowingStateLoss();
+    }
+
+    /**
+     * 初始化Fragment
+     */
+    private void initFragments() {
+        ConsiliaDateDirFragment consiliaDateDirFragment = new ConsiliaDateDirFragment();
+        ConsiliaPatientDirFragment consiliaPatientDirFragment = new ConsiliaPatientDirFragment();
+        LibraryFragment libraryFragment = new LibraryFragment();
+        fragments.add(consiliaDateDirFragment);
+        fragments.add(consiliaPatientDirFragment);
+        fragments.add(libraryFragment);
+        lastShowFragmentIndex = 0;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.v_home_fragment, consiliaDateDirFragment)
+                .show(consiliaDateDirFragment)
+                .commit();
+    }
+
+    /**
+     * 双击退出应用
+     */
+    private void exitByDoubleClick() {
+        if (isExit == false) {
+            isExit = true; // 准备退出
+            ToastUtil.showToast(mActivity, "再按一次退出程序");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 3000);
+        } else {
+            SPUtil.clear(mActivity);
+            finish();
+            System.exit(0);
+        }
+    }
+
 }
