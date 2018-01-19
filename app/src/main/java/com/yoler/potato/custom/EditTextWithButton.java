@@ -46,6 +46,13 @@ public class EditTextWithButton extends AppCompatEditText {
         setClearIconVisible(hasFocus() && text.length() > 0);
     }
 
+    /**
+     * 当ClearEditText焦点发生变化、输入长度为零时，隐藏删除图标，否则，显示删除图标
+     *
+     * @param focused
+     * @param direction
+     * @param previouslyFocusedRect
+     */
     @Override
     protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect);
@@ -55,10 +62,20 @@ public class EditTextWithButton extends AppCompatEditText {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
-            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_UP://用户抬起了手指
                 Drawable drawable = getCompoundDrawables()[DRAWABLE_RIGHT];
-                if (drawable != null && event.getX() <= (getWidth() - getPaddingRight())
-                        && event.getX() >= (getWidth() - getPaddingRight() - drawable.getBounds().width())) {
+                /**--------------复杂写法，便于理解代码------------------
+                if (drawable != null) {
+                    int xClick = (int) event.getX();//获取点击位置的x坐标
+                    int xDrawableRight = getWidth() - getPaddingRight();//删除图标右边缘的x坐标
+                    int xDrawableLeft = getWidth() - getPaddingRight() - drawable.getBounds().width();//删除图标左边缘的x坐标
+                    if (xClick <= xDrawableRight && xClick >= xDrawableLeft) {
+                        setText("");
+                    }
+                }
+                 --------------------------------*/
+                if (drawable != null && (int) event.getX() <= (getWidth() - getPaddingRight())
+                        && (int) event.getX() >= (getWidth() - getPaddingRight() - drawable.getBounds().width())) {
                     setText("");
                 }
                 break;

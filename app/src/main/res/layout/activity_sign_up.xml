@@ -24,36 +24,69 @@
         android:layout_marginTop="@dimen/margin_top"
         android:hint="请输入用户名" />
 
-    <com.yoler.potato.custom.EditTextWithButton
-        android:id="@+id/et_password"
-        style="@style/et_sign_style"
+    <TextView
+        android:id="@+id/tv_user_name_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_user_name"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_right"
         android:layout_marginTop="@dimen/margin_top"
+        android:textColor="@color/red"
+        android:visibility="gone" />
+
+    <com.yoler.potato.custom.EditTextWithButton
+        android:id="@+id/et_password"
+        style="@style/et_sign_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_user_name_hint"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="@dimen/margin_top"
         android:hint="请输入密码"
         android:inputType="textPassword" />
 
-    <com.yoler.potato.custom.EditTextWithButton
-        android:id="@+id/et_ensure_password"
-        style="@style/et_sign_style"
+    <TextView
+        android:id="@+id/tv_password_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_password"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_right"
         android:layout_marginTop="@dimen/margin_top"
+        android:textColor="@color/red"
+        android:visibility="gone" />
+
+    <com.yoler.potato.custom.EditTextWithButton
+        android:id="@+id/et_ensure_password"
+        style="@style/et_sign_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_password_hint"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="@dimen/margin_top"
         android:hint="请再次输入密码"
         android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/tv_ensure_password_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_ensure_password"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="@dimen/margin_top"
+        android:textColor="@color/red"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_sign_up"
         style="@style/btn_sign_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_ensure_password"
+        android:layout_below="@id/tv_ensure_password_hint"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_right"
         android:layout_marginTop="@dimen/margin_top"
