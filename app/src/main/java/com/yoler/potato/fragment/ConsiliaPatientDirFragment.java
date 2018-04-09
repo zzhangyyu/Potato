@@ -22,7 +22,7 @@ import com.yoler.potato.request.ConsiliaPatientDirReqContent;
 import com.yoler.potato.response.PatientDirResp;
 import com.yoler.potato.response.PatientDirRespContent;
 import com.yoler.potato.util.ActivityUtil;
-import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.Host;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
@@ -97,7 +97,7 @@ public class ConsiliaPatientDirFragment extends BaseFragment implements BaseQuic
         consiliaPatientDirReq.setOs("Android");
         consiliaPatientDirReq.setPhone("15311496135");
         consiliaPatientDirReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.GET_CONSILIA_PATIENT_DIR, GsonUtil.objectToJson(consiliaPatientDirReq), new Callback() {
+        MyOkHttpUtil.postAsync(Host.GET_CONSILIA_PATIENT_DIR, GsonUtil.objectToJson(consiliaPatientDirReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {

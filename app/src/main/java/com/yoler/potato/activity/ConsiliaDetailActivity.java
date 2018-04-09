@@ -10,7 +10,7 @@ import com.yoler.potato.request.ConsiliaDetailReqContent;
 import com.yoler.potato.response.ConsiliaDetailResp;
 import com.yoler.potato.response.ConsiliaDetailRespContent;
 import com.yoler.potato.util.ActivityUtil;
-import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.Host;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
@@ -76,7 +76,7 @@ public class ConsiliaDetailActivity extends BaseActivity {
         consiliaDetailReq.setOs("Android");
         consiliaDetailReq.setPhone("15311496135");
         consiliaDetailReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.GET_CONSILIA_DETAIL, GsonUtil.objectToJson(consiliaDetailReq), new Callback() {
+        MyOkHttpUtil.postAsync(Host.GET_CONSILIA_DETAIL, GsonUtil.objectToJson(consiliaDetailReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {

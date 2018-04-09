@@ -15,7 +15,7 @@ import com.yoler.potato.request.ConsiliaDateIntroReqContent;
 import com.yoler.potato.response.ConsiliaDateIntroResp;
 import com.yoler.potato.response.ConsiliaDateIntroRespPI;
 import com.yoler.potato.util.ActivityUtil;
-import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.Host;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
@@ -82,7 +82,7 @@ public class ConsiliaDateIntroActivity extends BaseActivity implements BaseQuick
         consiliaDateIntroReq.setOs("Android");
         consiliaDateIntroReq.setPhone("15311496135");
         consiliaDateIntroReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.GET_CONSILIA_DATE_INTRO, GsonUtil.objectToJson(consiliaDateIntroReq), new Callback() {
+        MyOkHttpUtil.postAsync(Host.GET_CONSILIA_DATE_INTRO, GsonUtil.objectToJson(consiliaDateIntroReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {

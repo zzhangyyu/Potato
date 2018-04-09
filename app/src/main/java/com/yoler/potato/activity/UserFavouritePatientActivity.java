@@ -1,7 +1,6 @@
 package com.yoler.potato.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,7 @@ import com.yoler.potato.request.UserFavouritePatientReq;
 import com.yoler.potato.request.UserFavouritePatientReqContent;
 import com.yoler.potato.response.UserFavouritePatientResp;
 import com.yoler.potato.response.UserFavouritePatientRespContent;
-import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.Host;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
@@ -74,7 +73,7 @@ public class UserFavouritePatientActivity extends BaseActivity {
         userFavouritePatientReq.setOs("Android");
         userFavouritePatientReq.setPhone("15311496135");
         userFavouritePatientReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.GET_USER_FAVOURITE_PATIENT, GsonUtil.objectToJson(userFavouritePatientReq), new Callback() {
+        MyOkHttpUtil.postAsync(Host.GET_USER_FAVOURITE_PATIENT, GsonUtil.objectToJson(userFavouritePatientReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {

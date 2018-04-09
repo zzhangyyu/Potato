@@ -25,7 +25,7 @@ import com.yoler.potato.request.ConsiliaDateDirReqContent;
 import com.yoler.potato.response.DateDirResp;
 import com.yoler.potato.response.DateDirRespContent;
 import com.yoler.potato.util.ActivityUtil;
-import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.Host;
 import com.yoler.potato.util.DateFormatUtil;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
@@ -153,7 +153,7 @@ public class ConsiliaDateDirFragment extends BaseFragment implements CalendarDia
         consiliaDateDirReq.setOs("Android");
         consiliaDateDirReq.setPhone("15311496135");
         consiliaDateDirReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.GET_CONSILIA_DATE_DIR, GsonUtil.objectToJson(consiliaDateDirReq), new Callback() {
+        MyOkHttpUtil.postAsync(Host.GET_CONSILIA_DATE_DIR, GsonUtil.objectToJson(consiliaDateDirReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {

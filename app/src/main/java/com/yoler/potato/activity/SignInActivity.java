@@ -1,8 +1,6 @@
 package com.yoler.potato.activity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +9,7 @@ import android.widget.TextView;
 import com.yoler.potato.R;
 import com.yoler.potato.request.SignInReq;
 import com.yoler.potato.request.SignInReqContent;
-import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.Host;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
@@ -20,8 +18,6 @@ import com.yoler.potato.util.StringUtil;
 import com.yoler.potato.util.ToastUtil;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -108,7 +104,7 @@ public class SignInActivity extends BaseActivity {
         signInReq.setOs("Android");
         signInReq.setPhone("15311496135");
         signInReq.setVersion("V1.0");
-        MyOkHttpUtil.postAsync(Constant.GET_CONSILIA_DETAIL, GsonUtil.objectToJson(signInReq), new Callback() {
+        MyOkHttpUtil.postAsync(Host.GET_CONSILIA_DETAIL, GsonUtil.objectToJson(signInReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {

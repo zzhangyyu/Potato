@@ -15,7 +15,7 @@ import com.yoler.potato.request.ConsiliaPatientIntroReqContent;
 import com.yoler.potato.response.ConsiliaPatientIntroResp;
 import com.yoler.potato.response.ConsiliaPatientIntroRespContent;
 import com.yoler.potato.util.ActivityUtil;
-import com.yoler.potato.util.Constant;
+import com.yoler.potato.util.Host;
 import com.yoler.potato.util.GsonUtil;
 import com.yoler.potato.util.LogUtil;
 import com.yoler.potato.util.MyOkHttpUtil;
@@ -80,7 +80,7 @@ public class ConsiliaPatientIntroActivity extends BaseActivity implements BaseQu
         consiliaPatientIntroReq.setPhone("15311496135");
         consiliaPatientIntroReq.setVersion("V1.0");
 
-        MyOkHttpUtil.postAsync(Constant.GET_CONSILIA_PATIENT_INTRO, GsonUtil.objectToJson(consiliaPatientIntroReq), new Callback() {
+        MyOkHttpUtil.postAsync(Host.GET_CONSILIA_PATIENT_INTRO, GsonUtil.objectToJson(consiliaPatientIntroReq), new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
                 mActivity.runOnUiThread(new Runnable() {
